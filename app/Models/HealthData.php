@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HealthData extends Model
 {
     use HasFactory;
-    protected $fillable = ['content']; // Specify the fillable fields
+    protected $fillable = [
+        'content'
+    ];
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MqttController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +16,19 @@ use App\Http\Controllers\MqttController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::controller(DashboardController::class, '')->group(function(){
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+});
+
+
+Route::controller(AuthController::class, '')->group(function(){
+    Route::post('/login', 'login')->name('login');
+    Route::get('/login', 'loginView')->name('loginView');
+
+    Route::post('/register', 'register')->name('register');
+    Route::get('/register', 'registerView')->name('registerView');
 });
 
 Route::controller(MqttController::class, '')->group(function(){
