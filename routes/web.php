@@ -16,10 +16,8 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
-    Route::controller(DashboardController::class, '')->group(function(){
-        Route::get('/dashboard', 'index')->name('dashboard');
-    });
+Route::controller(DashboardController::class, '')->group(function(){
+    Route::get('/dashboard', 'index')->name('dashboard');
 });
 
 
