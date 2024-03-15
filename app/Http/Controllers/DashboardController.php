@@ -13,7 +13,7 @@ class DashboardController extends Controller
             $referer = $request->server('HTTP_REFERER');
             \Log::info(explode("/", $referer));
     
-            if (explode("/", $referer)[0] == "") {
+            if (explode("/", $referer)[3] !== "login") {
                 return redirect()->route('login');
             }
             return view('dashboard');

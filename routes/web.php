@@ -5,6 +5,7 @@ use App\Http\Controllers\MqttController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CalculationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,4 @@ Route::controller(MqttController::class, '')->group(function(){
     Route::get('/subscribe', 'subscribe')->name('subscribe');
 });
 
+Route::get('/calculate', [CalculationController::class, 'calculate'])->name('calculate');
