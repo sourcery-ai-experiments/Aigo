@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MqttController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ Route::controller(DashboardController::class, '')->group(function(){
     Route::get('/dashboard', 'index')->name('dashboard');
 });
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::controller(AuthController::class, '')->group(function(){
     Route::post('/login', 'login')->name('login');
