@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MqttController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CalculationController;
 
@@ -18,8 +18,8 @@ use App\Http\Controllers\CalculationController;
 |
 */
 
-Route::controller(DashboardController::class, '')->group(function(){
-    Route::get('/dashboard', 'index')->name('dashboard');
+Route::controller(AdminController::class, '')->group(function(){
+    Route::get('/admin-dashboard', 'index')->name('admin-dashboard');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
