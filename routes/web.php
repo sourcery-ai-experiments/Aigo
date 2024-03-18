@@ -10,7 +10,9 @@ Route::get('/', function () {
 
 
 Route::controller(AdminController::class, '')->group(function(){
-    Route::get('/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
+    //Route::get('/admin/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/admin/doctor-info', 'showDoctor')->middleware(['auth', 'verified'])->name('dashboard');//->name('showDoctor');
+    Route::get('/admin/patient-info', 'showPatient')->middleware(['auth', 'verified'])->name('showPatient');
 });
 
 Route::middleware('auth')->group(function () {

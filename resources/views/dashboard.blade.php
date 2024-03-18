@@ -35,81 +35,72 @@
         {{-- MENU 1: USER DETAILS --}}
         <div class="menu">
           <aside></aside>
-          <h6>User Info & Details</h6>
+          <h6>User Details</h6>
         </div> <br>
 
-        {{-- SUB-MENU 1: VIEW USER INFO --}}
+        {{-- SUB-MENU 1: PATIENT INFO --}}
         <div class="btn-group submenu ms-4 ps-2 mt-3 mb-3">
-          <span class="material-symbols-outlined"> group </span>
-          <a href="" 
+          <span class="material-symbols-outlined"> personal_injury </span>
+          <a href="{{ route('showPatient') }}" 
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">View User Info
+            onmouseout="this.style.color='#8296C5'">Patient Info
           </a>
         </div>
 
-        {{-- SUB-MENU 2: DOWNLOAD USER INFO --}}
+        {{-- SUB-MENU 2: DOCTOR INFO --}}
         <div class="btn-group submenu ms-4 ps-2">
-          <span class="material-symbols-outlined"> file_save </span>
-          <a href=""
+          <span class="material-symbols-outlined"> diversity_1 </span>
+          <a href="{{ route('dashboard') }}"
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">Download User Info
+            onmouseout="this.style.color='#8296C5'">Doctor Info
           </a>
         </div>
 
-        {{-- MENU 2: CREATE NEW POST --}}
-        <div class="menu">
-          <aside></aside>
-          <h6>Create New Post</h6>
-        </div> <br>
-
-        {{-- SUB-MENU 1: KARIR --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-2 mb-3">
-          <span class="material-symbols-outlined"> work </span>
-          <a href=""
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">Create New Career
-          </a>
-        </div>
-
-        {{-- SUB-MENU 2: ACARA --}}
-        <div class="btn-group submenu ms-4 ps-2 mb-3">
-          <span class="material-symbols-outlined"> theater_comedy </span>
-          <a href=""
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">Create New Event
-          </a>
-        </div>
-
-        {{-- SUB-MENU 3: BEASISWA --}}
-        <div class="btn-group submenu ms-4 ps-2 mb-2">
-          <span class="material-symbols-outlined"> school </span>
-          <a href=""
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">Create New Beasiswa
-          </a>
-        </div>
-
-        {{-- MENU 3: SETTINGS --}}
+        {{-- MENU 2: SETTINGS --}}
         <div class="menu">
           <aside></aside>
           <h6>Settings</h6>
         </div> <br>
 
         {{-- SUB-MENU 1: MY PROFILE --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-3">
+        <div class="btn-group submenu ms-4 ps-2 mt-2 mb-3">
           <span class="material-symbols-outlined"> settings </span>
-          <a href="" 
+          <a href=""
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">My Profile
+            onmouseout="this.style.color='#8296C5'"> My Profile
           </a>
         </div>
 
         {{-- SUB-MENU 2: HISTORY --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-3 mb-5">
+        <div class="btn-group submenu ms-4 ps-2">
           <span class="material-symbols-outlined"> history </span>
+          <a href=""
+            onmouseover="this.style.color='#6FFFE9'" 
+            onmouseout="this.style.color='#8296C5'">Log & History
+          </a>
+        </div>
+
+        {{-- MENU 3: HELP --}}
+        <div class="menu">
+          <aside></aside>
+          <h6>Help & More</h6>
+        </div> <br>
+
+        {{-- SUB-MENU 1: Privacy & Policy --}}
+        <div class="btn-group submenu ms-4 ps-2 mt-3">
+          <span class="material-symbols-outlined"> policy </span>
           <a href="" 
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#7c7974'">History
+            onmouseout="this.style.color='#8296C5'">Privacy & Policy
+          </a>
+        </div>
+
+        {{-- SUB-MENU 2: Terms & Conditions --}}
+        <div class="btn-group submenu ms-4 ps-2 mt-3 mb-5">
+          <span class="material-symbols-outlined"> contract </span>
+          <a href="" 
+            onmouseover="this.style.color='#6FFFE9'" 
+            onmouseout="this.style.color='#8296C5'">Terms & Conditions
           </a>
         </div>
         <br>
@@ -134,11 +125,11 @@
           <thead>
               <tr>
                   <th>Username</th>
-                  <th>User Role</th>
-                  <th>Tema</th>
-                  <th>Last Updated</th>
+                  <th>Nama Lengkap</th>
+                  <th>Gender</th>
+                  <th>Email</th>
+                  <th>Telepon</th>
                   <th>Action</th>
-                  
               </tr>
           </thead>
 
@@ -147,9 +138,11 @@
             @foreach ($data as $item)
               <tr>
                   <td>{{ $item->username }}</td>
-                  <td>{{ $item->user_role }}</td>
-                  <td>{{ $item->tema }}</td>
-                  <td>{{ $item->updated_at->format('d F Y') }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->gender }}</td>
+                  <td>{{ $item->email }}</td>
+                  <td>{{ $item->telepon }}</td>
+                  {{-- <td>{{ $item->updated_at->format('d F Y') }}</td> --}}
                   <td>
                     <a href="/post/{{ $item->post_id }}" class="material-symbols-outlined me-2" href="">edit</a>
                     <a href="/delete/post/{{ $item->post_id }}" class="material-symbols-outlined"  id="delete-icon">delete_forever</a>

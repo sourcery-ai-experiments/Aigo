@@ -9,7 +9,7 @@ body {
     height: 100%;
     width: 250px;
     background-color: #0b132b;
-    color: #7c7974;
+    color: #8296c5;
     float: left;
     position: fixed;
     z-index: 1; /* Stay on top */
@@ -113,7 +113,7 @@ body {
 
 .submenu a {
     text-decoration: none;
-    color: #7c7974;
+    color: #8296c5;
     margin-left: 10px;
 }
 
