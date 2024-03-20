@@ -17,6 +17,9 @@ Route::controller(AdminController::class, '')->group(function(){
     //Route::get('/admin/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/admin/doctor-info', 'showDoctor')->middleware(['auth', 'verified'])->name('dashboard');//->name('showDoctor');
     Route::get('/admin/patient-info', 'showPatient')->middleware(['auth', 'verified'])->name('showPatient');
+    Route::get('/delete/user/{id}', 'delete')->name('delete-user');
+    Route::get('/user/{id}', 'showData')->name('show-user');
+    Route::post('/update/user/{id}', 'updateData')->name('update-user');
 });
 
 Route::middleware('auth')->group(function () {
