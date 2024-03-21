@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'user_role' => $faker->randomElement(['admin', 'user', 'doctor']),
             'username' => $faker->userName,
             'password' => Hash::make('password'),
-            'nama' => $faker->name,
+            'name' => $faker->name,
             'email' => $faker->unique()->safeEmail,
             'telepon' => $faker->phoneNumber,
             'alamat' => $faker->address,

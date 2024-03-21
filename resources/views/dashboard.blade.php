@@ -138,7 +138,7 @@
             @foreach ($data as $item)
               <tr>
                   <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->name }}</td>
                   <td>{{ $item->gender }}</td>
                   <td>{{ $item->email }}</td>
                   <td>{{ $item->telepon }}</td>

@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -41,14 +41,14 @@
                     <div class="mt-4">
                         <x-input-label for="email" :value="__('Email')" />
                         <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2 mb-2" />
+                        <x-input-error :messages="$errors->get('email')" c  lass="mt-2 mb-2" />
                     </div>
             
                     <!-- Nama -->
                     <div class="mt-4">
-                        <x-input-label for="nama" :value="__('Nama')" />
-                        <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="old('nama')" required autocomplete="nama" />
-                        <x-input-error :messages="$errors->get('nama')" class="mt-2" />
+                        <x-input-label for="name" :value="__('Nama')" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autocomplete="name" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
             
                     <!-- Telepon -->
