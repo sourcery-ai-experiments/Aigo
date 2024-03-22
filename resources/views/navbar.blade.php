@@ -27,6 +27,13 @@
             background-color:#384C7F;
         }
 
+        .btnlogin:hover{
+            border-color: #6FFFE9;
+            border : solid 2px;
+            color:#6FFFE9;
+            background-color:#fff;
+        }
+
     </style>
   </head>
   <body>
@@ -40,7 +47,7 @@
             <div class="navbar-nav">
                 <a class="nav-link" aria-current="page" href="/">Home</a>
                 <a class="nav-link" href="/about">About Us</a>
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="/contact">Contact Us</a>
             </div>
             </div>
             <a class="btn btnlogin" href="/login">Login</a>

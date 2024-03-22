@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         img{
-            width:60%;
+            width:70%;
         }
         .homecontainer{
             padding-left:50px;
@@ -24,7 +24,7 @@
             color: #6FFFE9;
         }
 
-        p{
+        .capt1{
             font-family: 'Open Sans', sans-serif;;
             font-size: 16px;
             color: #6FFFE9;
@@ -67,7 +67,7 @@
 
         #section2 {
             background-color: #f8f9fa; /* Warna latar belakang */
-            padding: 50px 0; /* Padding atas dan bawah */
+            padding: 20px 0; /* Padding atas dan bawah */
         }
 
         .row-container {
@@ -98,8 +98,8 @@
                 <div class="row-container d-flex justify-content-center">
                     <div class="col-md-6 d-flex align-items-center text-container">
                         <H3> Cegah sebelum Terlambat. Kenali Risiko dan Amati Pola Makan serta Gaya Hidup Anda.</H3>
-                        <p>Obesitas bukan hanya masalah penampilan, tapi juga kesehatan. Perubahan kecil dalam gaya hidup dapat membuat perbedaan besar.</p>
-                        <a class="btn btnreg" href="/">Kenali Tubuh Anda</a>
+                        <p class="capt1">Obesitas bukan hanya masalah penampilan, tapi juga kesehatan. Perubahan kecil dalam gaya hidup dapat membuat perbedaan besar.</p>
+                        <a class="btn btnreg" href="/login">Kenali Tubuh Anda</a>
                     </div>
                     <div class="col-md-6 align-items-center">
                         <img src="{{ asset('asset/page4.png') }}" alt="">
@@ -109,24 +109,37 @@
         </section>
         <section id="section2" >
             <div class="container">
-                <div class="row-container d-flex justify-content-center">
-                    <div class="col-md-4 d-flex align-items-center">
-                        <img class="imgsect2" src="{{ asset('asset/page1.png') }}" alt="">
-                        <div class="text-below">Kenali Proporsi Ideal Tubuh Anda</div>
+                <div class="col-md-12 text-center">
+                <h2>Our Service</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center" style="padding:50px;">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('asset/page1.jpg') }}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Cek Tingkat Obesitas</p>
+                        </div>
                     </div>
-                    <div class="col-md-4 align-items-center">
-                        <img class="imgsect2" src="{{ asset('asset/page2.png') }}" alt="">
-                        <div class="text-below">Dapatkan Rekomendasi Pencegahan Obesitas</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('asset/page2.jpg') }}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Rekomendasi Pengelolaan Kesehatan</p>
+                        </div>
                     </div>
-                    <div class="col-md-4 align-items-center">
-                        <img class="imgsect2" src="{{ asset('asset/page3.png') }}" alt="">
-                        <div class="text-below">Dapatkan Langkah Penanganan Obesitas Anda</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('asset/page3.jpg') }}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Konsultasi Dokter</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
-
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

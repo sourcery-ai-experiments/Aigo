@@ -12,6 +12,9 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 Route::controller(AdminController::class, '')->group(function(){
     //Route::get('/admin/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
