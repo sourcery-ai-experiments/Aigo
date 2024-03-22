@@ -29,7 +29,7 @@ class RegistrationTest extends TestCase
             'username' => $this->faker->userName,
             'password' => $this->faker->password,
             'password_confirmation' => $this->faker->password,
-            'nama' => $this->faker->name,
+            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'telepon' => $this->faker->phoneNumber,
             'alamat' => $this->faker->address,
@@ -51,7 +51,7 @@ class RegistrationTest extends TestCase
         // Assert that the user data is correctly stored in the database
         $this->assertDatabaseHas('users', [
             'username' => $userData['username'],
-            'nama' => $userData['nama'],
+            'name' => $userData['name'],
             'email' => $userData['email'],
             'telepon' => $userData['telepon'],
             'alamat' => $userData['alamat'],
