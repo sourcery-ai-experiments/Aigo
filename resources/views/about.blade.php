@@ -21,7 +21,7 @@
         top: 50%;
         left: 25%; /* Sesuaikan dengan kebutuhan Anda */
         transform: translate(-50%, -50%);
-        color: #0B132B;
+        color: #F6F7FF;
         max-width: 30%; /* Warna teks putih agar kontras dengan latar belakang */
       }
 
@@ -30,14 +30,14 @@
       }
 
       .text-left{
-        color: #6FFFE9;
+        color: #384C7F;
       }
       .logo{
-        width:90%;
+        width:60%;
       }
 
       .vm{
-        color:#6FFFE9;
+        color:#384C7F;
         font-size: 18px;
       }
     </style>
@@ -50,12 +50,12 @@
           <h1>Kesehatan Anda Awal Dari Langkah Kami</h1>
         </div>
       </section>
-      <section id="section2" style="background-color: #0B132B; padding:10px;">
+      <section id="section2" style="background-color: #F6F7FF; padding:10px;">
         <div class="container">
           <div class="row">
             <div class="col-md-6 d-flex justify-content-center align-items-center" style="padding: 20px;">
               <div class="text-container">
-                <h3 class="text-center" style="color: #6FFFE9;">Apa itu AIGO ?</h3>
+                <h3 class="text-center" style="color: #384C7F;">Apa itu AIGO ?</h3>
                 <div class="text-containerr">
                 <div class="text-left">
                       <p>
@@ -80,7 +80,7 @@
           </div>
         </div>
       </section>
-      <section id="section3" style="background-color: #0B132B; padding:10px;">
+      <section id="section3" style="background-color: #F6F7FF; padding:10px;">
         <div class="container">
           <div class="row">
             <div class="col-md-6 vm" style="padding:50px;">
