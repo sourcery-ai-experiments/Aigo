@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'username' => 'required|string|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'nama' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'telepon' => 'required|string',
             'alamat' => 'string',
@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'user_role' => 'user',
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'nama' => $request->nama,
+            'name' => $request->name,
             'email' => $request->email,
             'telepon' => $request->telepon,
             'alamat' => $request->alamat,

@@ -138,14 +138,14 @@
             @foreach ($data as $item)
               <tr>
                   <td>{{ $item->username }}</td>
-                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->name }}</td>
                   <td>{{ $item->gender }}</td>
                   <td>{{ $item->email }}</td>
                   <td>{{ $item->telepon }}</td>
                   {{-- <td>{{ $item->updated_at->format('d F Y') }}</td> --}}
                   <td>
-                    <a href="/post/{{ $item->post_id }}" class="material-symbols-outlined me-2" href="">edit</a>
-                    <a href="/delete/post/{{ $item->post_id }}" class="material-symbols-outlined"  id="delete-icon">delete_forever</a>
+                    <a href="/user/{{ $item->id }}" class="material-symbols-outlined me-2" href="">edit</a>
+                    <a href="/delete/user/{{ $item->id }}" class="material-symbols-outlined"  id="delete-icon">delete_forever</a>
                   </td>
               </tr>
             @endforeach
