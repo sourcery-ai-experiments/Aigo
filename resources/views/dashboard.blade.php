@@ -41,7 +41,7 @@
         {{-- SUB-MENU 1: PATIENT INFO --}}
         <div class="btn-group submenu ms-4 ps-2 mt-3 mb-3">
           <span class="material-symbols-outlined"> personal_injury </span>
-          <a href="{{ route('showPatient') }}" 
+          <a href="{{ route('admin-dashboard') }}" 
             onmouseover="this.style.color='#6FFFE9'" 
             onmouseout="this.style.color='#8296C5'">Patient Info
           </a>
@@ -50,7 +50,7 @@
         {{-- SUB-MENU 2: DOCTOR INFO --}}
         <div class="btn-group submenu ms-4 ps-2">
           <span class="material-symbols-outlined"> diversity_1 </span>
-          <a href="{{ route('dashboard') }}"
+          <a href="{{ route('showDoctor') }}"
             onmouseover="this.style.color='#6FFFE9'" 
             onmouseout="this.style.color='#8296C5'">Doctor Info
           </a>
