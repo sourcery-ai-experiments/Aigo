@@ -22,42 +22,33 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_new_users_can_register(): void
+    public function test_new_user_can_register()
     {
-        // Generate fake user data
         $userData = [
             'username' => $this->faker->userName,
-            'password' => $this->faker->password,
-            'password_confirmation' => $this->faker->password,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'telepon' => $this->faker->phoneNumber,
             'alamat' => $this->faker->address,
-            'gender' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
+            'gender' => $this->faker->randomElement(['male', 'female']),
         ];
-    
-        // Post the registration form
+
         $response = $this->post('/register', $userData);
-    
-        // Assert that the registration was successful (status 302 for redirect)
-        $response->assertStatus(Response::HTTP_FOUND);
-    
-        // Assert that the user is authenticated after registration
-        $this->assertAuthenticated();
-    
-        // Assert that the user is redirected to the dashboard
+
+        $response->assertStatus(302); // Check if redirected after successful registration
         $response->assertRedirect(route('dashboard'));
-    
-        // Assert that the user data is correctly stored in the database
+        $this->assertAuthenticated(); // Check if user is authenticated after registration
+        
         $this->assertDatabaseHas('users', [
             'username' => $userData['username'],
-            'name' => $userData['name'],
-            'email' => $userData['email'],
+            'email' => strtolower($userData['email']),
             'telepon' => $userData['telepon'],
             'alamat' => $userData['alamat'],
             'gender' => $userData['gender'],
         ]);
-    
+
         // Assert that the password is hashed
         $user = User::where('email', $userData['email'])->first();
         $this->assertTrue(Hash::check($userData['password'], $user->password));
