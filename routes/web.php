@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -16,8 +19,10 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/dashboardClient', function () {
-    return view('dashboardClient');
+Route::group(['prefix' => 'client'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->name('dashboardClient');
+    Route::get('/consultation', [DashboardController::class, 'consultation'])->name('consultation');
+    Route::get('/result', [DashboardController::class, 'result'])->name('result');
 });
 
 Route::controller(AdminController::class, '')->group(function(){

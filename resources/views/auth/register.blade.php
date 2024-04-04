@@ -69,7 +69,10 @@
                     <!-- Gender -->
                     <div class="mt-4">
                         <x-input-label for="gender" :value="__('Gender')" />
-                        <x-text-input id="gender" class="block mt-1 w-full" type="text" name="gender" :value="old('gender')" required autocomplete="gender" />
+                        <select id="gender" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="gender" required autocomplete="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
                         <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                     </div>
             
