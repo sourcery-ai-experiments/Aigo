@@ -13,7 +13,7 @@ class DashboardController extends Controller
 
     public function consultation()
     {
-        return view('consultation');
+        return view('health-data');
     }
 
     public function result()

@@ -39,12 +39,12 @@
           <h6>User Details</h6>
         </div> <br>
 
-        {{-- SUB-MENU 1: Consultation --}}
+        {{-- SUB-MENU 1: Health Data --}}
         <div class="btn-group submenu ms-4 ps-2 mt-3 mb-3">
           <span class="material-symbols-outlined"> personal_injury </span>
           <a href="{{ route('consultation') }}" 
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Consultation
+            onmouseout="this.style.color='#8296C5'">Health Data
           </a>
         </div>
 

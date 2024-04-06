@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HealthDataController;
 
 
 
@@ -19,10 +20,13 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+
 Route::group(['prefix' => 'client'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->name('dashboardClient');
-    Route::get('/consultation', [DashboardController::class, 'consultation'])->name('consultation');
-    Route::get('/result', [DashboardController::class, 'result'])->name('result');
+    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->middleware(['auth', 'verified'])->name('dashboardClient');
+    Route::get('/result', [DashboardController::class, 'result'])->middleware(['auth', 'verified'])->name('result');
+
+    Route::post('/health-data', [HealthDataController::class, 'store'])->middleware(['auth', 'verified'])->name('health-data.store');
+    Route::get('/consultation', [HealthDataController::class, 'showHealthDataForm'])->middleware(['auth', 'verified'])->name('consultation');
 });
 
 Route::controller(AdminController::class, '')->group(function(){
