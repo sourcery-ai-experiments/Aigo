@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         if($role=='user'){
             return redirect()->intended(route('dashboardClient', absolute: false));
         } else if ($role == 'doctor'){
-            // redirect to doctor dashboard
+            // redirect to doctor dashboard (TODO)
         } else {
             return redirect()->intended(route('dashboard', absolute: false));
         }
