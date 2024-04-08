@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
+
+class StravaController extends Controller
+{
+
+    public function authorize(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+    
+    if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        $clientId = "124405";
+        $redirectUri = route('strava.callback');
+        $authUrl = "https://www.strava.com/oauth/authorize?client_id={$clientId}&redirect_uri={$redirectUri}&response_type=code&scope=activity:read_all";
+
+        return redirect()->away($authUrl);
+    }
+
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
+}
+
+    public function handleCallback(Request $request)
+    {
+        $authorizationCode = $request->input('code');
+        if ($authorizationCode) {
+            $tokenEndpoint = "https://www.strava.com/oauth/token";
+            $clientId = "124405";
+            $clientSecret = "3df0635b0711e098b2e87d5467d9c4596727353d";
+
+            $response = Http::post($tokenEndpoint, [
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'code' => $authorizationCode,
+                'grant_type' => 'authorization_code',
+            ]);
+
+            $data = $response->json();
+            $accessToken = $data['access_token'];
+
+            // Store the access token in the session or database for future API requests
+            session(['strava_access_token' => $accessToken]);
+            // Redirect the user to the desired page after successful authorization
+
+            if (Auth::check()) {
+                $user = Auth::user();
+                if ($user->user_role == 'user') {
+                    return redirect()->intended(route('dashboard'));
+                } elseif ($user->user_role == 'doctor') {
+                    // redirect to doctor dashboard (TODO)
+                } else {
+                    return redirect()->intended(route('admin.dashboard'));
+                }
+            }
+        }
+
+        // Handle the case when the authorization code is missing
+        return view('auth.login');
+    }
+
+    public function fetchAthleteActivities()
+    {
+        $accessToken = session('strava_access_token');
+    
+        if ($accessToken) {
+            $activitiesEndpoint = "https://www.strava.com/api/v3/athlete/activities";
+    
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+            ])->get($activitiesEndpoint);
+    
+            $activities = $response->json();
+    
+            // Return the activities array
+            return $activities;
+        }
+    
+        // Handle the case when the access token is missing
+        return redirect()->route('login')->with('error', 'Strava access token not found.');
+    }
+}

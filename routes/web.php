@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HealthDataController;
+use App\Http\Controllers\StravaController;
 
 
 
@@ -20,9 +21,12 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
+Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
+
 
 Route::group(['prefix' => 'client'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->middleware(['auth', 'verified'])->name('dashboardClient');
+    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/result', [DashboardController::class, 'result'])->middleware(['auth', 'verified'])->name('result');
 
     Route::post('/health-data', [HealthDataController::class, 'store'])->middleware(['auth', 'verified'])->name('health-data.store');
@@ -31,7 +35,7 @@ Route::group(['prefix' => 'client'], function () {
 
 Route::controller(AdminController::class, '')->group(function(){
     //Route::get('/admin/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('/admin/doctor-info', 'showDoctor')->middleware(['auth', 'verified'])->name('dashboard');//->name('showDoctor');
+    Route::get('/admin/doctor-info', 'showDoctor')->middleware(['auth', 'verified'])->name('admin.dashboard');//->name('showDoctor');
     Route::get('/admin/patient-info', 'showPatient')->middleware(['auth', 'verified'])->name('showPatient');
     Route::get('/delete/user/{id}', 'delete')->name('delete-user');
     Route::get('/user/{id}', 'showData')->name('show-user');

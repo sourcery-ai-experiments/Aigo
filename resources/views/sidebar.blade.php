@@ -26,7 +26,7 @@
       </div>
 
       <div class="dashboard">
-        <a href="{{ route('dashboardClient') }}">
+        <a href="{{ route('dashboard') }}">
           <button type="button" class="btn-dashboard">Dashboard</button>
         </a>
         
