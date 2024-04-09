@@ -49,4 +49,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function physicalActivities()
+    {
+        return $this->hasMany(PhysicalActivity::class, 'users_id');
+    }
+
+    public function healthDatas()
+    {
+        return $this->hasMany(HealthData::class, 'users_id');
+    }
 }

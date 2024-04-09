@@ -85,14 +85,15 @@
                               <th>Tanggal</th>
                               <th>Jenis Olahraga</th>
                               <th>Jarak Lari</th>
-                              <th>Waktu Bergerak</th>
+                              <th>Durasi Olahraga</th>
                               <th>Avg. Kecepatan</th>
                               <th>Avg. Steps</th>
                            </tr>
                         </thead>
                         <tbody>
                            @foreach ($activities as $activity)
-                           <tr>
+                           <tr> 
+                              {{-- start_date, id --}}
                               <td>{{ $activity['name'] }}</td>
                               <td>{{ $activity['sport_type'] }}</td>
                               <td>{{ $activity['distance'] }} meter</td>
