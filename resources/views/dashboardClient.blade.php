@@ -9,56 +9,53 @@
       <link href="{{ asset('/asset/css/dashboard.css') }}" rel="stylesheet" />
       <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
       <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-      <style>
-      </style>
+
       <title>Dashboard</title>
    </head>
    <body>
       <div class="container-flex">
-         @include('sidebar')
+         @include('client-sidebar')
          <div class="content">
-            <h1 class="mt-5 mb-5">
+            <h2 class="mt-5 mb-5 fw-bold">
                <center>Customer Dashboard</center>
-            </h1>
-            <div class="row me-4 ms-4 mb-5">
-               <div class="col mb-3">
-                  <div class="greetings-card">
-                     <div class="frame">
-                        <div class="text-wrapper">Welcome,</div>
-                        <div class="div">{{auth()->user()->name}}</div>
-                     </div>
-                     <div class="table">
-                        <div class="frame-2">
-                           <div class="group">
-                              <div class="text-wrapper-2">Tingkat Obesitas</div>
-                              <div class="text-wrapper-3">Overweight</div>
-                              <img class="line" src="{{ asset('/asset/svg/Lineshadow.svg') }}" />
-                           </div>
-                           <div class="group-2">
-                              <div class="text-wrapper-2">Tinggi Badan</div>
-                              <div class="text-wrapper-4">170 cm</div>
-                              <img class="line" src="{{ asset('/asset/svg/Lineshadow.svg') }}" />
-                           </div>
-                           <div class="group-3">
-                              <div class="text-wrapper-2">Berat Badan</div>
-                              <div class="text-wrapper-5">92 kg</div>
-                           </div>
+            </h2>
+
+            <div class="row p-5">
+               <div class="col greetings-card me-4">
+                  <div class="frame">
+                     <div class="text-wrapper">Welcome,</div>
+                     <div class="div">{{auth()->user()->name}}</div>
+                  </div>
+                  <div class="table">
+                     <div class="frame-2">
+                        <div class="group">
+                           <div class="text-wrapper-2">Tingkat Obesitas</div>
+                           <div class="text-wrapper-3">Normal</div>
+                           <img class="line" src="{{ asset('/asset/svg/Lineshadow.svg') }}" />
+                        </div>
+                        <div class="group-2">
+                           <div class="text-wrapper-2">Tinggi Badan</div>
+                           <div class="text-wrapper-4">{{$healthData->height}} cm</div>
+                           <img class="line" src="{{ asset('/asset/svg/Lineshadow.svg') }}" />
+                        </div>
+                        <div class="group-3">
+                           <div class="text-wrapper-2">Berat Badan</div>
+                           <div class="text-wrapper-5">{{$healthData->weight}} kg</div>
                         </div>
                      </div>
-                     <div class="add">
-                        <a href="" class="ellipse">
-                        <img class="vector" src="{{ asset('/asset/svg/edit.svg') }}" />
-                        </a>
-                     </div>
+                  </div>
+                  <div class="add">
+                     <a href="" class="ellipse">
+                     <img class="vector" src="{{ asset('/asset/svg/edit.svg') }}" />
+                     </a>
                   </div>
                </div>
-               <div class="col-4 mb-3">
-                  <div class="chart-container p-2">
-                     <canvas id="myChart"></canvas>
-                  </div>
+               
+               <div class="col greetings-card me-4">
+                  <canvas id="myChart"></canvas>
                </div>
-               <div class="col mb-3">
-                  <div class="post">
+
+               <div class="col-3 greetings-card post me-5">
                      <div class="author">
                         <div class="text-wrapper">Nama Dokter</div>
                         <div class="div">Minggu, 19 Mei 2024</div>
@@ -70,9 +67,11 @@
                      </div>
                      <div class="text-wrapper-2">Jadwal Konsultasi</div>
                      <img class="line" src="{{ asset('/asset/svg/dashline.svg') }}" />
-                  </div>
                </div>
+               
             </div>
+            
+            
          </div>
          <div class="item">
             <div class="containeritem">
@@ -86,20 +85,17 @@
                               <th>Jenis Olahraga</th>
                               <th>Jarak Lari</th>
                               <th>Durasi Olahraga</th>
-                              <th>Avg. Kecepatan</th>
-                              <th>Avg. Steps</th>
+                              {{-- <th>Calories Burned</th> --}}
                            </tr>
                         </thead>
                         <tbody>
                            @foreach ($activities as $activity)
                            <tr> 
-                              {{-- start_date, id --}}
-                              <td>{{ $activity['name'] }}</td>
-                              <td>{{ $activity['sport_type'] }}</td>
+                              <td>{{ $activity['date'] }}</td>
+                              <td>{{ $activity['type'] }}</td>
                               <td>{{ $activity['distance'] }} meter</td>
-                              <td>{{ $activity['moving_time'] }} detik</td>
-                              <td>{{ $activity['average_speed'] }} m/s</td>
-                              <td>{{ $activity['average_cadence'] ?? 'N/A' }}</td>
+                              <td>{{ $activity['duration'] }} detik</td>
+                              {{-- <td>{{ $activity['calories_burned'] }} kcal</td> --}}
                            </tr>
                            @endforeach
                         </tbody>

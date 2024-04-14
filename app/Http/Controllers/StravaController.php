@@ -83,7 +83,7 @@ class StravaController extends Controller
             ])->get($activitiesEndpoint);
     
             $activities = $response->json();
-                //dd($activities);
+            //dd($activities);
             foreach ($activities as $activity) {
                 $existingActivity = PhysicalActivity::where('id', $activity['id'])->first();
     

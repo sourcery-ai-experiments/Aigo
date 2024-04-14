@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HealthDataController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\StravaController;
 use App\Http\Middleware\RedirectBasedOnRole;
 
@@ -25,14 +25,21 @@ Route::get('/contact', function () {
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 
-
+// 1. CLIENT PAGES
 Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->name('dashboard')->middleware('role');;
+    // DASHBOARD CONTROLLER
+    Route::get('/dashboard', [DashboardController::class, 'dashboardClient'])->name('dashboard')->middleware('role');
+    Route::get('/activity-report', [DashboardController::class, 'activityReport'])->name('activity-report');
     Route::get('/result', [DashboardController::class, 'result'])->name('result');
-    Route::post('/health-data', [HealthDataController::class, 'store'])->name('health-data.store');
-    Route::get('/consultation', [HealthDataController::class, 'showHealthDataForm'])->name('consultation');
+
+    // CONSULTATION CONTROLLER
+    Route::get('/health-data', [ConsultationController::class, 'showHealthDataForm'])->name('health-data.show');
+    Route::post('/health-data', [ConsultationController::class, 'storeHealthDataForm'])->name('health-data.store');
+    Route::get('/jadwal', [ConsultationController::class, 'showJadwalForm'])->name('jadwal.show');
 });
 
+
+// 2. ADMIN PAGES
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/admin/doctor-info', [AdminController::class, 'showDoctor'])->name('admin.dashboard')->middleware('role');;
     Route::get('/admin/patient-info', [AdminController::class, 'showPatient'])->name('showPatient');

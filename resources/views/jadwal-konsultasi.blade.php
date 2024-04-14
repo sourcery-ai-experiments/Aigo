@@ -67,7 +67,7 @@
          <div class="item justify-content-center">
             <div class="row">
                <div class="container d-flex justify-content-center" style="padding:50px;">
-                  <h2>Health Data</h2>
+                  <h2>Jadwal Konsultasi</h2>
                </div>
             </div>
             <div class="event-form p-5 me-5 ms-5 mt-4">
@@ -75,62 +75,45 @@
                   @csrf
                   {{-- ROW 1 --}}
                   <div class="row">
-                     {{-- Tanggal Lahir --}}
+                     {{-- Pilih Dokter --}}
                      <div class="col">
                         <div class="mb-3">
-                           <label for="birthdate" class="form-label">Tanggal Lahir</label>
+                           <label for="birthdate" class="form-label">Pilih Dokter</label>
                            <div class="input-group date" id="birthdatePicker" data-target-input="nearest">
-                               <input type="text" class="form-control datetimepicker-input" id="birthdate" name="birthdate" style="border-radius: 20px" data-target="#birthdatePicker" placeholder="Pilih Tanggal Lahir" value="{{ old('birthdate', $healthData->birthdate ?? '') }}"/>
+                               <input type="text" class="form-control datetimepicker-input" id="birthdate" name="birthdate" style="border-radius: 20px" data-target="#birthdatePicker" placeholder="Pilih Dokter yang tersedia" value="{{ old('birthdate', $healthData->birthdate ?? '') }}"/>
                                <div class="input-group-append" data-target="#birthdatePicker" data-toggle="datetimepicker">
                                </div>
                            </div>
                        </div>
                      </div>
-                     {{-- Berat Badan --}}
+                     {{-- Tanggal Konsultasi --}}
                      <div class="col">
                         <div class="mb-3">
-                           <label for="weight" class="form-label">Berat Badan (kg)</label>
-                           <input value="{{old('weight', $healthData->weight ?? '')}}" type="text" class="form-control" name="weight" id="weight" aria-describedby="weightHelp" style="border-radius: 20px" placeholder="60">
+                           <label for="weight" class="form-label">Tanggal Konsultasi</label>
+                           <input value="{{old('weight', $healthData->weight ?? '')}}" type="text" class="form-control" name="weight" id="weight" aria-describedby="weightHelp" style="border-radius: 20px" placeholder="Pilih jadwal konsultasi dengan dokter">
                         </div>
                      </div>
                   </div>
                   {{-- ROW 2 --}}
                   <div class="row">
-                     {{-- Tinggi Badan --}}
+                     {{-- Jam Konsultasi --}}
                      <div class="col">
                         <div class="mb-3">
-                           <label for="height" class="form-label">Tinggi Badan (cm)</label>
-                           <input value="{{old('height', $healthData->height ?? '')}}" type="text" class="form-control" id="height" name="height" aria-describedby="heightHelp" style="border-radius: 20px" placeholder="170">
+                           <label for="height" class="form-label">Jam Konsultasi</label>
+                           <input value="{{old('height', $healthData->height ?? '')}}" type="text" class="form-control" id="height" name="height" aria-describedby="heightHelp" style="border-radius: 20px" placeholder="Pilih jam konsultasi dengan dokter">
                         </div>
                      </div>
-                     {{-- Waktu Tidur--}}
+                     {{-- Upload Transkrip Hasil--}}
                      <div class="col">
                         <div class="mb-3">
-                           <label for="sleeptime" class="form-label">Waktu Tidur per hari (jam)</label>
+                           <label for="sleeptime" class="form-label">Upload Transkrip Hasil</label>
                            <input value="{{old('sleeptime', $healthData->sleeptime ?? '')}}" type="text" class="form-control" name="sleeptime" id="sleeptime" aria-describedby="sleeptimeHelp" style="border-radius: 20px" placeholder="8">
-                        </div>
-                     </div>
-                  </div>
-                  {{-- ROW 3 --}}
-                  <div class="row">
-                     {{-- Penyakit --}}
-                     <div class="col">
-                        <div class="mb-3">
-                           <label for="disease" class="form-label">Penyakit yang sedang diderita</label>
-                           <input value="{{old('disease', $healthData->disease ?? '')}}" type="text" class="form-control" id="disease" name="disease" aria-describedby="diseaseHelp" style="border-radius: 20px" placeholder="Flu">
-                        </div>
-                     </div>
-                     {{-- Makanan --}}
-                     <div class="col">
-                        <div class="mb-3">
-                           <label for="food" class="form-label">Makanan</label>
-                           <input value="{{old('food', $healthData->food ?? '')}}" type="text" class="form-control" name="food" id="food" aria-describedby="foodHelp" style="border-radius: 20px" placeholder="Makanan yang sering dimakan dalam 1 bulan terakhir">
                         </div>
                      </div>
                   </div>
                   <div class="row justify-content-end mt-5">
                      <div class="col-auto">
-                        <button class="btn btn-primary" type="submit">Next</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
                      </div>
                   </div>
                </form>

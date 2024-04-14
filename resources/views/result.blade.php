@@ -43,7 +43,7 @@
 
   <div class="container-flex">
 
-   @include('sidebar')
+   @include('client-sidebar')
 
 
     

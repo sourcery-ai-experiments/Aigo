@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('physical_activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users');
+            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->timestamp('date');
             $table->string('type');
             $table->decimal('distance', 8, 2);

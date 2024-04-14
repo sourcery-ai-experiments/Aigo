@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://aigo.flxnzz.my.id" target="_blank"><img src="logo.svg" width=500 alt="AIGO Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -7,60 +7,86 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+<h3 align="center">
+  <a href="#overview">Overview</a> •
+  <a href="#features">Features</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#requirements">Requirements</a> •
+  <a href="#contributors">Contributors</a> •
+  <a href="#license">License</a>
+</h3>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center"><a href="https://aigo.flxnzz.my.id" target="_blank"><img src="web.png" width=800 alt="AIGO Logo"></a></p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+AIGO is an AI-powered guidance system designed to assist in the management of obesity. This innovative platform leverages the power of Internet of Things (IoT) devices, specifically smartwatches, to gain valuable insights into your daily activities. Aigo provides personalized recommendations for weight management, nutrition, and exercise.
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Our platform offers a comprehensive suite of features designed to manage healthy lifestyle habits and effective weight management:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Real-time Progress Monitoring:** Visualize your activity progress in real-time through intuitive dashboards and charts.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   **IoT-Powered Health Tracking**: Monitor your daily activity, such as steps taken, distance traveled, and calories burned.
 
-## Laravel Sponsors
+-   **Personalized Health Recommendation**: AIGO utilizes IoT devices (smartwatch) to monitor various lifestyle such as physical activity, eating habits, and sleep patterns. Users can receive recommendations by consulting a doctor by utilizing those data.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Requirements
 
-### Premium Partners
+-   **Internet Connection.** A stable internet connection is required to access our web platform and interact with our services seamlessly.
+-   **IoT Devices.** The types of IoT devices supported for monitoring physical activity are smartwatches and smartbands, such as Apple Watch, Mi Band, Amazfit, etc. _(Tested on Amazfit GTS 2e)_
+-   **Strava Account.** To access our services, you'll need a Strava account for [authentication and authorization purposes](#data-privacy-and-security).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Getting Started
 
-## Contributing
+To set up and utilize our platform, follow these steps:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   Register an account and provide basic personal information.
+-   In order to use our services, you need to [Authorize Strava Account](https://support.strava.com/hc/en-us/articles/360018969732-App-Authorization-Settings)
 
-## Code of Conduct
+-   Connect your IoT devices (smartwatch) to AIGO to start tracking key lifestyle metrics.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   Track and Monitor your progress and visualize trends over time.
 
-## Security Vulnerabilities
+-   Access personalized recommendations based on your health data and activity progress
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Data Privacy and Security
+
+To provide you with the most personalized experience possible, AIGO offers features that connect with your [**Strava account**](https://support.strava.com/hc/en-us/articles/360018969732-App-Authorization-Settings). We understand data privacy is important, and we want to assure you that your information is secure.
+
+-   By authorizing your [**Strava account**](https://support.strava.com/hc/en-us/articles/360018969732-App-Authorization-Settings), you're enabling us to provide you a personalized experience while ensuring the security and protection of your data.
+-   We only access data relevant to your AIGO experience.
+-   We're committed to transparency in how we handle your data, and we will never misuse or share it without your explicit consent.
+
+Your trust is paramount to us, and we're dedicated to upholding the highest standards of data privacy and security in everything we do.
+
+## Contributors
+
+We appreciate the dedication and contributions of the following individuals to this project:
+
+| Name                         | Role                                   | GitHub                                                    |
+| ---------------------------- | -------------------------------------- | --------------------------------------------------------- |
+| Rafidhia Haikal Pasya        | Full-stack Developer & DevOps Engineer | [@W-zrd](https://github.com/W-zrd/)                       |
+| Putu Vidya Ananda Ratmayanti | UI Designer & Front-end Developer      | [@vidyaratmayantii](https://github.com/vidyaratmayantii/) |
+| Muhammad Vikhan Muharram     | AI Developer                           | [@vikhanmuhammad](https://github.com/vikhanmuhammad/)     |
+| Mohammad William             | UI Designer                            | [@Vanillateaa](https://github.com/Vanillateaa/)           |
+
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
+## Acknowledgements
+
+-   AIGO was developed to address the growing need for personalized health management solutions.
+-   Special thanks to all contributors and open-source libraries used in the development of AIGO.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software"""
+
+---
+
+> Aigo [aigo.flxnzz.my.id](http://aigo.flxnzz.my.id/) &nbsp;&middot;&nbsp;
+> GitHub [@W-zrd](https://github.com/W-zrd) &nbsp;&middot;&nbsp;
+> Medium [@w333zard](https://medium.com/@flxnzz_47)
