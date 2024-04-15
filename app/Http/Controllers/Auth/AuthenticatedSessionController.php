@@ -25,19 +25,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        
         $request->authenticate();
         $request->session()->regenerate();
+    
         $role = Auth::user()->user_role;
-
-        if($role=='admin'){
-            return redirect()->intended(route('admin-dashboard', absolute: false));
-        } else if ($role == 'doctor'){
-            return redirect()->intended(route('doctor-dashboard', absolute: false));
+    
+        if ($role == 'user') {
+            return redirect()->intended(route('dashboard'));
+        } else if ($role == 'doctor') {
+            // redirect to doctor dashboard (TODO)
+            // return redirect()->intended(route('doctor.dashboard'));
         } else {
-            return redirect()->intended(route('user-dashboard', absolute: false));
+            return redirect()->intended(route('admin.dashboard'));
         }
-        
     }
 
     /**
@@ -46,11 +46,15 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+    
         $request->session()->invalidate();
-
+    
         $request->session()->regenerateToken();
-
+    
+        if ($request->session()->has('remember_token')) {
+            $request->session()->forget('remember_token');
+        }
+    
         return redirect('/');
     }
 }

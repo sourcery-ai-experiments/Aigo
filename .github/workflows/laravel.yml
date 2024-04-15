@@ -1,13 +1,13 @@
-name: Aigo@Wzrd
+name: Aigo
 
 on:
   push:
-    branches: ["main"]
+    branches: ["unit-test"]
   pull_request:
-    branches: ["main"]
+    branches: ["unit-test"]
 
 jobs:
-  aigo-unit-tests:
+  laravel-tests:
     runs-on: ubuntu-latest
 
     steps:
