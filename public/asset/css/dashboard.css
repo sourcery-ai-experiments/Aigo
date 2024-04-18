@@ -278,7 +278,7 @@ body {
     align-items: start;
     flex-grow: 1;
     flex-basis: 0;
-    width: 450px;
+    width: auto;
     margin: auto 0;
     padding: 10px 80px 10px 16px;
     border: 1px solid #a4bbe9;
