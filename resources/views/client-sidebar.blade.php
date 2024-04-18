@@ -78,7 +78,7 @@
         {{-- MENU 2: SETTINGS --}}
         <div class="menu">
           <aside></aside>
-          <h6>Settings</h6>
+          <h6>Settings & Profile</h6>
         </div>
 
         {{-- SUB-MENU 1: MY PROFILE --}}

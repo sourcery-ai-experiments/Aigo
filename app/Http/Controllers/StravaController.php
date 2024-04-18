@@ -59,6 +59,7 @@ class StravaController extends Controller
             // Redirect the user to the desired page after successful authorization
 
             if (auth()->user()->user_role == 'user') {
+                $this->fetchAthleteActivities();
                 return redirect()->intended(route('dashboard'));
             } else if (auth()->user()->user_role == 'doctor') {
                 // redirect to doctor dashboard (TODO)

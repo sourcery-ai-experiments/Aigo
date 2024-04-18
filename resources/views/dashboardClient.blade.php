@@ -37,7 +37,7 @@
                              <div class="stat-item">
                                <span class="stat-label">Weight</span>
                                <div class="stat-value">
-                                 <span class="stat-number">{{$healthData->weight}}</span>
+                                 <span class="stat-number">{{$healthData->weight ?? 'N/A'}}</span>
                                  <span class="stat-unit">kg</span>
                                </div>
                              </div>
@@ -45,7 +45,7 @@
                              <div class="stat-item">
                                <span class="stat-label">Height</span>
                                <div class="stat-value">
-                                 <span class="stat-number">{{$healthData->height}}</span>
+                                 <span class="stat-number">{{$healthData->height ?? 'N/A'}}</span>
                                  <span class="stat-unit">cm</span>
                                </div>
                              </div>
@@ -57,10 +57,6 @@
                            </div>
                          </section>
                          
-                     </div>
-                     
-                     <div class="col-1" style="">
-                        <img src="{{asset('/asset/svg/line.svg')}}" />
                      </div>
                      
                      {{-- RECOMMENDATIONS --}}
@@ -122,7 +118,7 @@
                </div>
 
                {{-- KOLOM 2: UPCOMING APPOINTMENT --}}
-               <div class="col boxshadow ms-4 ps-4">
+               <div class="col-4 boxshadow ms-4 ps-4">
                   
                   <div class="row">
 
