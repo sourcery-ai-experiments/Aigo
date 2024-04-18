@@ -37,7 +37,7 @@
                              <div class="stat-item">
                                <span class="stat-label">Weight</span>
                                <div class="stat-value">
-                                 <span class="stat-number">{{$healthData->weight}}</span>
+                               {{-- <span class="stat-number">{{$healthData->weight}}</span> --}}
                                  <span class="stat-unit">kg</span>
                                </div>
                              </div>
@@ -45,7 +45,7 @@
                              <div class="stat-item">
                                <span class="stat-label">Height</span>
                                <div class="stat-value">
-                                 <span class="stat-number">{{$healthData->height}}</span>
+                               {{-- <span class="stat-number">{{$healthData->height}}</span> --}}
                                  <span class="stat-unit">cm</span>
                                </div>
                              </div>

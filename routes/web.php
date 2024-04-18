@@ -22,6 +22,18 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/admin', function () {
+    return view('dashboardAdmin');
+})->name('dashboardAdmin');
+
+Route::get('/patientList', function () {
+    return view('patient-list');
+})->name('patientList');
+
+Route::get('/doctorList', function () {
+    return view('doctor-list');
+})->name('doctorList');
+
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 

@@ -41,8 +41,8 @@ class StravaController extends Controller
         $authorizationCode = $request->input('code');
         if ($authorizationCode) {
             $tokenEndpoint = "https://www.strava.com/oauth/token";
-            $clientId = "124405";
-            $clientSecret = "3df0635b0711e098b2e87d5467d9c4596727353d";
+            $clientId = "125163";
+            $clientSecret = "bc95ff42f9cf110143ee3a02c8cc1805651aa6ea";
 
             $response = Http::post($tokenEndpoint, [
                 'client_id' => $clientId,
