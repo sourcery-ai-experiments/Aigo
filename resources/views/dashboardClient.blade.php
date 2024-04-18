@@ -223,7 +223,7 @@
             <div class="container" style="padding:20px;">
 
             </div>
-            <h2 class="text-center">test</h2>
+            <h2 class="text-center">Overweight</h2>
 
           </div>
         </div>
@@ -239,7 +239,19 @@
             <div class="container" style="padding:20px;">
 
             </div>
-            <h2 class="text-center">test</h2>
+            <div class="container">
+              <div cass= "row">
+                <div class="col-md-6">
+                <h2 class="text-center">test</h2>
+                <p>Tinggi Badan</p>
+                </div>
+                <div class="col-md-6">
+                <h2 class="text-center">test</h2>
+                <p>Berat Badan</p>
+                </div>
+              </div>
+            </div>
+            
 
           </div>
         </div>
