@@ -1,330 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+      <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
+      <link href="{{ asset('/asset/css/dashboard.css') }}" rel="stylesheet" />
+      <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-  <link href="{{ asset('/asset/admin.css') }}" rel="stylesheet" />
-  <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <style>
-    .menu{
-      margin : 20px;
-    }
+      <title>Dashboard</title>
+   </head>
+   <body>
+      <div class="container-flex">
+         @include('client-sidebar')
+         <div class="content">
+            <h2 class="mt-5 mb-5 fw-bold">
+               <center>Customer Dashboard</center>
+            </h2>
 
-    .content{
-      padding-left: 250px;
-    }
+            <div class="row pe-5 ps-5 pb-4">
 
-    .container-notification {
-      background-color: #ffffff; 
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Efect shadow */
-      padding: 10px;
-      width: 45px; 
-      height : 45px;
-      display: inline-flex;
-      align-items: center; 
-      justify-content: flex-end;
-    }
+               {{-- KOLOM 1 --}}
+               <div class="col-7 ">
+                  {{-- PROFILE & RECOMMENDATIONS --}}
+                  <div class="row boxshadow mb-4">
+                     {{-- PROFILE --}}
+                     <div class="col me-3">
+                        <section class="customer-profile">
+                           <div class="profile-image"></div>
+                           <h2 class="customer-name">{{auth()->user()->name}}</h2>
+                           <p class="customer-email">{{auth()->user()->email}}</p>
+                           
+                           <div class="customer-stats">
+                             <div class="stat-item">
+                               <span class="stat-label">Weight</span>
+                               <div class="stat-value">
+                                 <span class="stat-number">{{$healthData->weight}}</span>
+                                 <span class="stat-unit">kg</span>
+                               </div>
+                             </div>
+                             
+                             <div class="stat-item">
+                               <span class="stat-label">Height</span>
+                               <div class="stat-value">
+                                 <span class="stat-number">{{$healthData->height}}</span>
+                                 <span class="stat-unit">cm</span>
+                               </div>
+                             </div>
+                             
+                             <div class="obesity-status">
+                               <span class="obesity-label">Obesity Status</span>
+                               <span class="obesity-value">Normal</span>
+                             </div>
+                           </div>
+                         </section>
+                         
+                     </div>
+                     
+                     <div class="col-1" style="">
+                        <img src="{{asset('/asset/svg/line.svg')}}" />
+                     </div>
+                     
+                     {{-- RECOMMENDATIONS --}}
+                     <div class="col">
+                        <h2 class="customer-name fs-5 ">Recommendations</h2>
+                        <section class="calories-container mt-3">
+                           <div class="icon-wrapper" id="calories">
+                             <img src="{{asset('/asset/svg/flame.svg')}}" alt="Calories icon" class="calories-icon" />
+                           </div>
+                           <div class="calories-info">
+                             <p class="calories-label pt-2">Calories</p>
+                             <p class="calories-value">2100 cal</p>
+                           </div>
+                         </section>
 
+                         <section class="calories-container mt-2">
+                           <div class="icon-wrapper" id="distance">
+                             <img src="{{asset('/asset/svg/shoes.svg')}}" alt="Calories icon" class="calories-icon" />
+                           </div>
+                           <div class="calories-info">
+                             <p class="calories-label pt-2">Running Distance</p>
+                             <p class="calories-value">3000 meters</p>
+                           </div>
+                         </section>
 
-    .container-notification a {
-      text-decoration: none; /* Menghapus dekorasi hyperlink */
-      color: #8296C5; /* Warna teks */
-    }
+                         <section class="calories-container mt-2">
+                           <div class="icon-wrapper" id="sleep">
+                             <img src="{{asset('/asset/svg/moon.svg')}}" alt="Calories icon" class="calories-icon" />
+                           </div>
+                           <div class="calories-info">
+                             <p class="calories-label pt-2">Sleep Time</p>
+                             <p class="calories-value">8 hours/day</p>
+                           </div>
+                         </section>
+                     </div>
+                  </div>
+                  
 
-    .container-notification a:hover {
-      color: #6FFFE9; /* Warna teks saat dihover */
-    }
+                  {{-- ACTIVITY HISTORY --}}
+                  <div class="row">
+                     <section class="activity-log">
+                        <header class="activity-header">
+                          <div class="header-date">Date</div>
+                          <div class="header-activity">Activity</div>
+                          <div class="header-distance">Distance</div>
+                          <div class="header-duration">Duration</div>
+                        </header>
 
-    .containerContent{
-      background-color: #ffffff; 
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Efect shadow */
-      width: 250px;
-      height: 150px;
-      /* margin-left: 30px;
-      padding: 10px; */
-      display: inline-flex;
-      align-items: center; 
-    }
+                        @foreach ($activities as $activity)
+                           <article class="activity-item mb-3">
+                              <div class="item-date">{{ $activity['date'] }}</div>
+                              <div class="item-activity">{{ $activity['type'] }}</div>
+                              <div class="item-distance">{{ $activity['distance'] }} m</div>
+                              <div class="item-duration">{{ $activity['duration'] }} seconds</div>
+                           </article>
+                        @endforeach
+                      </section>
+                  </div>
+               </div>
 
-    .containerContent a {
-      text-decoration: none; /* Menghapus dekorasi hyperlink */
-      color: #8296C5; /* Warna teks */
-    }
+               {{-- KOLOM 2: UPCOMING APPOINTMENT --}}
+               <div class="col boxshadow ms-4 ps-4">
+                  
+                  <div class="row">
 
-    .containeritem {
-      background-color: #ffffff; 
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Efect shadow */
-      margin-left: 30px;
-      padding: 10px;
-      display: inline-flex;
-      align-items: center; 
-      width: calc(100% - 120px); 
-    }
+                     <article class="appointment-item">
+                        <h2 class="customer-name fs-5 mb-4">Upcoming Appointment</h2>
+                        <div class="mt-1">
+                           <div class="appointment-time">
+                              <div class="appointment-status"></div>
+                              <time class="appointment-datetime">Today, 08:30 AM - 10:30 AM</time>
+                            </div>
+                            <div class="appointment-details">
+                              <div class="appointment-connector"></div>
+                              <div class="doctor-info mt-2">
+                                <p class="doctor-name">Nama Dokter</p>
+                                <p class="hospital-name">RS. Telkomedika Bandung</p>
+                              </div>
+                            </div>
+                        </div>
 
-  /* Styling untuk item-item */
-  .item {
-    padding-left: 265px;
-    padding-bottom:50px;
-  }
-  </style>
-  <title>Dashboard</title>
-</head>
-<body>
+                        <div class="mt-1">
+                           <div class="appointment-time">
+                              <div class="appointment-status"></div>
+                              <time class="appointment-datetime">Today, 08:30 AM - 10:30 AM</time>
+                            </div>
+                            <div class="appointment-details">
+                              <div class="appointment-connector"></div>
+                              <div class="doctor-info mt-2">
+                                <p class="doctor-name">Nama Dokter</p>
+                                <p class="hospital-name">RS. Telkomedika Bandung</p>
+                              </div>
+                            </div>
+                        </div>
 
-  <div class="container-flex">
+                        <div class="mt-1">
+                           <div class="appointment-time">
+                              <div class="appointment-status"></div>
+                              <time class="appointment-datetime">Today, 08:30 AM - 10:30 AM</time>
+                            </div>
+                            <div class="appointment-details">
+                              <div class="appointment-connector"></div>
+                              <div class="doctor-info mt-2">
+                                <p class="doctor-name">Nama Dokter</p>
+                                <p class="hospital-name">RS. Telkomedika Bandung</p>
+                              </div>
+                            </div>
+                        </div>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-      <div class="container-flex header-logo p-0">
-        <img src="{{ asset('/assets/img/UniShare-logo.png') }}" alt="" style="height: 36px; " >
-        <h4 style="color: #F6F7FF" class="ms-2 mt-2"> Aigo </h4>
+                        
+                      </article>
+                      
+                      
+                  </div>
+               </div>
+
+            </div>
+                  
+         </div>
       </div>
-
-      <div class="dashboard">
-        <a href="">
-          <button type="button" class="btn-dashboard">Dashboard</button>
-        </a>
-        
-      </div>
-      
-      <div class="">
-        {{-- MENU 1: USER DETAILS --}}
-        <div class="menu">
-          <aside></aside>
-          <h6>User Details</h6>
-        </div> <br>
-
-        {{-- SUB-MENU 1: Consultation --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-3 mb-3">
-          <span class="material-symbols-outlined"> personal_injury </span>
-          <a href="{{ route('consultation') }}" 
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Consultation
-          </a>
-        </div>
-
-        {{-- SUB-MENU 2: Doctor Consultation --}}
-        <div class="btn-group submenu ms-4 ps-2  mb-3">
-          <span class="material-symbols-outlined"> diversity_1 </span>
-          <a href="{{ route('dashboard') }}"
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Doctor Consultation
-          </a>
-        </div>
-
-        {{-- SUB-MENU 3: Transaction --}}
-        <div class="btn-group submenu ms-4 ps-2">
-          <span class="material-symbols-outlined"> payment </span>
-          <a href="{{ route('dashboard') }}"
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Transaction
-          </a>
-        </div>
-
-        {{-- MENU 2: SETTINGS --}}
-        <div class="menu">
-          <aside></aside>
-          <h6>Settings</h6>
-        </div> <br>
-
-        {{-- SUB-MENU 1: MY PROFILE --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-2 mb-3">
-          <span class="material-symbols-outlined"> settings </span>
-          <a href=""
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'"> My Profile
-          </a>
-        </div>
-
-        {{-- SUB-MENU 2: HISTORY --}}
-        <div class="btn-group submenu ms-4 ps-2">
-          <span class="material-symbols-outlined"> history </span>
-          <a href=""
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Log & History
-          </a>
-        </div>
-
-        {{-- MENU 3: HELP --}}
-        <div class="menu">
-          <aside></aside>
-          <h6>Help & More</h6>
-        </div> <br>
-
-        {{-- SUB-MENU 1: Privacy & Policy --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-3">
-          <span class="material-symbols-outlined"> policy </span>
-          <a href="" 
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Privacy & Policy
-          </a>
-        </div>
-
-        {{-- SUB-MENU 2: Terms & Conditions --}}
-        <div class="btn-group submenu ms-4 ps-2 mt-3 mb-5">
-          <span class="material-symbols-outlined"> contract </span>
-          <a href="" 
-            onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Terms & Conditions
-          </a>
-        </div>
-        <br>
-        
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <a class="logout" href="">
-            <button class="btn-logout mt-5">
-            <span class="material-symbols-outlined"> logout</span>Log Out</button>
-          </a>
-        </form>
-        
-
-      </div>
-
-
-    </div>
-    
-    
-    <div class="content">
-      <div class = "m-5 row">
-        <div class="col-md-9">
-          <h2>Welcome, Costumer 1</h2>
-          <p>Here’s what’s happening in your account today.</p>
-        </div>
-        <div class = "col-md-3 d-flex justify-content-end">
-          <div class= "container-notification">
-            <div class = "row">
-              <span class="material-symbols-outlined"> notifications </span>
-              <a href="{{ route('dashboard') }}"
-                onmouseover="this.style.color='#6FFFE9'">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="m-5 row">
-        <div class="col-md-4 containerContent  d-flex justify-space-between">
-          <div class="row align-items-start">
-            <div class="d-flex align-items-center">
-              <span class="material-symbols-outlined"> monitor_weight </span>
-              <a href="" 
-                onmouseover="this.style.color='#6FFFE9'" 
-                onmouseout="this.style.color='#8296C5'">Tingkat Obesitas
-              </a>
-            </div>
-            <div class="container" style="padding:20px;">
-
-            </div>
-            <h2 class="text-center">Overweight</h2>
-
-          </div>
-        </div>
-        <div class="col-md-4 containerContent d-flex justify-space-between" style="margin-left: 190px; margin-right: 95px;">
-        <div class="row align-items-start">
-            <div>
-              <span class="material-symbols-outlined"> Conditions </span>
-              <a href="" 
-                onmouseover="this.style.color='#6FFFE9'" 
-                onmouseout="this.style.color='#8296C5'">Proporsi Tubuh
-              </a>
-            </div>
-            <div class="container" style="padding:20px;">
-
-            </div>
-            <div class="container">
-              <div cass= "row">
-                <div class="col-md-6">
-                <h2 class="text-center">test</h2>
-                <p>Tinggi Badan</p>
-                </div>
-                <div class="col-md-6">
-                <h2 class="text-center">test</h2>
-                <p>Berat Badan</p>
-                </div>
-              </div>
-            </div>
-            
-
-          </div>
-        </div>
-        <div class="col-md-4 containerContent d-flex justify-space-between" style="margin-left: 95px;">
-        <div class="row align-items-start">
-            <div>
-              <span class="material-symbols-outlined"> clinical_notes </span>
-              <a href="" 
-                onmouseover="this.style.color='#6FFFE9'" 
-                onmouseout="this.style.color='#8296C5'">Jadwal Konsultasi Dokter
-              </a>
-            </div>
-            <div class="container" style="padding:20px;">
-
-            </div>
-            <h2 class="text-center">test</h2>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="containeritem">
-        <div class="row" style="padding:10px;">
-          <h3>Recomendation</h3>
-          <div class="m-5 user-table" style="padding:0px; width:100%;">
-          <table id="example" class="display table">
-              <thead>
-                  <tr>
-                      <th>Makanan</th>
-                      <th>Olahraga</th>
-                      <th>Kualitas Tidur</th>
-                  </tr>
-              </thead>
-
-              
-          
-          </table>
-        </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- <div class="m-5 user-table">
-      <table id="example" class="display table">
-          <thead>
-              <tr>
-                  <th>Username</th>
-                  <th>Nama Lengkap</th>
-                  <th>Gender</th>
-                  <th>Email</th>
-                  <th>Telepon</th>
-                  <th>Action</th>
-              </tr>
-          </thead>
-
-          
-       
-      </table>
-    </div> -->
-  </div>
-  
-
-  
-
-
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-  <script>
-    $('#example').DataTable();
-  </script>
-</body>
+      <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+   </body>
 </html>

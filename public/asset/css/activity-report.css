@@ -1,0 +1,202 @@
+h3,
+h4,
+h5 {
+    font-family: "Poppins";
+}
+
+.content {
+    padding-left: 250px;
+}
+
+.activity-container {
+    border-radius: 20px;
+    box-shadow: 0 8px 30px 0 rgba(37, 36, 34, 0.07);
+    background-color: #fff;
+    display: flex;
+    padding: 0 14px 0 0;
+    gap: 12px;
+    text-transform: capitalize;
+}
+
+.summary-icon-wrapper {
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #fecd5a;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #1c1c30;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    padding: 0 30px;
+}
+
+.summary-icon {
+    object-fit: auto;
+    object-position: center;
+    width: 39px;
+    fill: #1c1c30;
+    align-self: center;
+}
+
+.summary-text {
+    font-family: Poppins, sans-serif;
+    margin-top: 5px;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+}
+
+.summary-count {
+    color: #efa800;
+    font: 600 28px Poppins, sans-serif;
+}
+
+.summary-unit {
+    color: #384c7f;
+    font: 400 14px Poppins, sans-serif;
+}
+
+.calories-container {
+    display: flex;
+    gap: 14px;
+}
+
+.avatar-container {
+    background-color: #eaecff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+}
+
+.calories-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.calories-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0;
+    width: fit-content;
+    margin: auto 0;
+}
+
+.calories-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 16px;
+}
+
+.calories-label {
+    color: #384c7f;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.calories-value {
+    color: #8296c5;
+    text-align: right;
+    font-size: 15px;
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+}
+
+.calories-value .calories-total {
+    font-weight: 500;
+    font-size: 18px;
+    color: rgba(55, 179, 183, 1);
+}
+
+.calories-progress {
+    border-radius: 16px;
+    background-color: #f8f2ff;
+    display: flex;
+    flex-direction: column;
+    height: 8px !important;
+}
+
+.calories-progress-bar {
+    border-radius: 16px;
+    background-color: #51dbd3 !important;
+    height: 8px;
+}
+
+.weight-card {
+    border-radius: 8px;
+    box-shadow: 0 5px 10px 0 rgba(234, 240, 246, 1);
+    background-color: #fff;
+    display: flex;
+    max-width: 360px;
+    gap: 20px;
+    font-weight: 500;
+    padding: 17px 16px;
+}
+
+.weight-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.date {
+    color: #8296c5;
+    font-family: "Poppins", sans-serif;
+}
+
+.weight {
+    color: #384c7f;
+    margin-top: 7px;
+    font: 18px "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+.weight-details {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    flex: 1;
+}
+
+.time {
+    color: #8296c5;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    align-self: end;
+}
+
+.weight-change {
+    display: flex;
+    margin-top: 9px;
+    gap: 9px;
+    color: #f5634a;
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.change-value {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+}
+
+.change-icon {
+    width: 16px;
+    height: 16px;
+    align-self: start;
+}

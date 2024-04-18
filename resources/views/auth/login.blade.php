@@ -29,7 +29,7 @@
             <div class="w-full sm:max-w-sm mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 <p class="plogin justify-center text-center">Login</p>
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('strava.authorize') }}">
         @csrf
 
         <!-- Email Address -->
@@ -54,8 +54,8 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
@@ -65,6 +65,8 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+ 
         <div class="flex items-center justify-center">
             <p style="color:#8296C5; font-size: 12px;">Belum memiliki akun?<a class="btn btn-link" href="/register" style="font-size: 12px;">Daftar sekarang</a></p>
         </div>
