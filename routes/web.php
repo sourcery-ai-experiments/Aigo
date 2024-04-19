@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ConsultationController;
@@ -59,6 +60,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/user/{id}', [AdminController::class, 'showData'])->name('show-user');
     Route::post('/update/user/{id}', [AdminController::class, 'updateData'])->name('update-user');
 });
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

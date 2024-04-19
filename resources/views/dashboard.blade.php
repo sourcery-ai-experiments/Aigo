@@ -50,7 +50,7 @@
         {{-- SUB-MENU 2: DOCTOR INFO --}}
         <div class="btn-group submenu ms-4 ps-2">
           <span class="material-symbols-outlined"> diversity_1 </span>
-          <a href="{{ route('dashboard') }}"
+          <a href="{{ route('admin.dashboard') }}"
             onmouseover="this.style.color='#6FFFE9'" 
             onmouseout="this.style.color='#8296C5'">Doctor Info
           </a>
