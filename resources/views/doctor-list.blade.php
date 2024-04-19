@@ -10,8 +10,9 @@
     <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
     <link href="{{ asset('/asset/css/dashboardDoctor.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>List Pasien</title>
+    <title>List Dokter</title>
     <style>
         
     </style>
@@ -34,15 +35,50 @@
     <div class="container-patient">
         <section class="data-table">
             <input type="search" class="search-input" placeholder="Cari.." aria-label="Search">
-            <header class="table-header">
-                <div class="header-cell">Nama</div>
-                <div class="header-cell">Field 2</div>
-                <div class="header-cell">Field 3</div>
-                <div class="header-cell">Field 4</div>
-                <div class="header-cell">Actions</div>
-            </header>
             <!-- Contoh gambar tabel -->
-            <img style="width:100%;" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7bf1c7aeaac22bac6f534c0ce9b8f5bd90b6333705a9e2817888ab24706e7ecf?apiKey=e644a539de5445e499b1d21950fa439b&" alt="Table Image" class="table-image">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Field 1</th>
+                  <th scope="col">Field 2</th>
+                  <th scope="col">Field 3</th>
+                  <th scope="col">Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>
+                    <i class="fas fa-edit" style="cursor: pointer; color: blue;" title="Edit"></i>
+                    <i class="fas fa-trash-alt" style="cursor: pointer; color: red; margin-left: 10px;" title="Delete"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>
+                    <i class="fas fa-edit" style="cursor: pointer; color: blue;" title="Edit"></i>
+                    <i class="fas fa-trash-alt" style="cursor: pointer; color: red; margin-left: 10px;" title="Delete"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                  <td>
+                    <i class="fas fa-edit" style="cursor: pointer; color: blue;" title="Edit"></i>
+                    <i class="fas fa-trash-alt" style="cursor: pointer; color: red; margin-left: 10px;" title="Delete"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <footer class="table-footer">
                 <div class="entries-info">Showing 1 to 10 of 10 entries</div>
                 <nav class="pagination">

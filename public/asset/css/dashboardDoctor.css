@@ -273,6 +273,7 @@ body {
     letter-spacing: 0.4px;
     align-self: stretch;
     font: 500 20px Poppins, sans-serif;
+    text-align: right;
 }
 
 .legend-item {
@@ -704,3 +705,5 @@ align-self: start;
     background-color: #007bff;
     color: #fff;
 }
+
+

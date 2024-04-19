@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
     <link href="{{ asset('/asset/css/dashboardDoctor.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -48,21 +49,7 @@
             <h2 class="user-roles-title">User Roles</h2>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2881eb2f9fa237386626417fdf555871e9ef508dc73a3179cf70dbba2e8b3694?apiKey=e644a539de5445e499b1d21950fa439b&" alt="User roles icon" class="user-roles-icon" loading="lazy" />
         </header>
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/030a1f6bffadffc6ce4ec13f1bd97e7576bd78d674f5fb6de947cdf5a33aa29d?apiKey=e644a539de5445e499b1d21950fa439b&" alt="User roles chart" class="user-roles-image" loading="lazy" />
-        <div class="user-roles-legend">
-            <div class="user-role">
-            <div class="user-role-indicator patient"></div>
-            <span class="user-role-label">Patient</span>
-            </div>
-            <div class="user-role">
-            <div class="user-role-indicator admin"></div>
-            <span class="user-role-label">Admin</span>
-            </div>
-            <div class="user-role">
-            <div class="user-role-indicator doctor"></div>
-            <span class="user-role-label">Doctor</span>
-            </div>
-        </div>
+        <canvas id="myDoughnutChart" width="400" height="400"></canvas>
       </section>
       </div>
       <div class="col-md-8">
@@ -107,19 +94,9 @@
               </div>
           </div>
           <div class="chart-column">
+          <h3 class="chart-title">Statistics</h3>
               <div class="chart-container">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b6154d068a910cbd4517b70066ed4be3de76af4ab879c6fd66548de8c83d387?apiKey=e644a539de5445e499b1d21950fa439b&" alt="Statistics Chart" class="chart-image" />
-              <div class="chart-legend">
-                  <h3 class="chart-title">Statistics</h3>
-                  <div class="legend-item obesity-legend">
-                  <div class="legend-color obesity-color"></div>
-                  <div class="legend-label">Obesity</div>
-                  </div>
-                  <div class="legend-item normal-legend">
-                  <div class="legend-color normal-color"></div>
-                  <div class="legend-label">Normal</div>
-                  </div>
-              </div>
+              <canvas id="statisticsChart" width="50" height="50"></canvas>
               </div>
           </div>
           </div>
@@ -149,6 +126,93 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
    
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+    // Ambil referensi ke elemen canvas
+    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+    // Data untuk pie chart
+    const data = {
+      labels: [
+        'Admin',
+        'Doctor',
+        'Patient'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [50, 10, 300],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    };
+
+    const config = {
+      type: 'doughnut',
+      data: data,
+    };
+    // Buat objek doughnut chart baru
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut', // Jenis chart (pie chart)
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom' // Posisi legenda chart (top, bottom, left, right)
+                }
+            }
+        }
+    });
+</script>
+<script>
+  // Ambil referensi ke elemen canvas untuk chart Statistics
+var ctxStatistics = document.getElementById('statisticsChart').getContext('2d');
+
+// Data untuk doughnut chart Statistics
+const dataStatistics = {
+  labels: ['Obesity','Normal'],
+  datasets: [{
+    label: 'Statistics Chart',
+    data: [300, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)'
+    ],
+    hoverOffset: 3
+  }]
+};
+
+// Konfigurasi untuk doughnut chart Statistics
+const configStatistics = {
+  type: 'doughnut',
+  data: dataStatistics,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'right'
+      },
+      
+      tooltip: {
+        callbacks: {
+          label: function(tooltipItem) {
+            return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+          }
+        }
+      }
+    }
+  }
+};
+
+// Buat objek doughnut chart baru untuk Statistics
+var statisticsChart = new Chart(ctxStatistics, configStatistics);
+
+</script>
+
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
