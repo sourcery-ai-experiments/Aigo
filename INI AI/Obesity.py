@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, classification_report
 
 # Fungsi untuk membaca data obesity
 def load_obesity_data(file_path):
@@ -71,8 +72,23 @@ if __name__ == "__main__":
     # Menampilkan hasil prediksi
     print(f"Predicted Obesity Category: {predicted_category}")
 
+    print("\n")
+
     print("Jumlah Tetangga:", knn_model.n_neighbors)
     print("Kelas Target:", knn_model.classes_)
     print("Metrik Jarak:", knn_model.effective_metric_)
     print("Output 2D:", knn_model.outputs_2d_)
+
+    print("\n")
+
+    # Memprediksi kategori obesitas untuk seluruh data training
+    y_pred_train = knn_model.predict(X)
+
+    # Menghitung akurasi model terhadap data training
+    accuracy_train = accuracy_score(y, y_pred_train)
+    print("Accuracy on Training Data:", accuracy_train)
+
+    # Menampilkan classification report untuk data training
+    print("Classification Report on Training Data:")
+    print(classification_report(y, y_pred_train))
 

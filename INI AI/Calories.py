@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 import pandas as pd
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import mean_squared_error
 
 # Fungsi untuk membaca data dari obesity atau dataset
 def load_data(file_path):
@@ -54,7 +55,18 @@ if __name__ == "__main__":
     # Menampilkan hasil prediksi
     print(f"Predicted Calories to Maintain Weight: {predicted_calories}")
 
+    print("\n")
+
     print("Jumlah Tetangga:", knn_model.n_neighbors)
     # print("Kelas Target:", knn_model.classes_)
     print("Metrik Jarak:", knn_model.effective_metric_)
     # print("Output 2D:", knn_model.outputs_2d_)
+
+    print("\n")
+
+    # Memprediksi nilai calories_to_maintain_weight untuk seluruh data training
+    y_pred_train = knn_model.predict(X)
+
+    # Menghitung MSE model terhadap data training
+    mse_train = mean_squared_error(y, y_pred_train)
+    print("Mean Squared Error on Training Data:", mse_train)
