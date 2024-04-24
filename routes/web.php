@@ -23,18 +23,6 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/admin', function () {
-    return view('dashboardAdmin');
-})->name('dashboardAdmin');
-
-Route::get('/patientList', function () {
-    return view('patient-list');
-})->name('patientList');
-
-Route::get('/doctorList', function () {
-    return view('doctor-list');
-})->name('doctorList');
-
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 
@@ -54,10 +42,11 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], funct
 
 // 2. ADMIN PAGES
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/admin/doctor-info', [AdminController::class, 'showDoctor'])->name('admin.dashboard')->middleware('role');;
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('role');
+    Route::get('/admin/doctor-info', [AdminController::class, 'showDoctor'])->name('showDoctor');
     Route::get('/admin/patient-info', [AdminController::class, 'showPatient'])->name('showPatient');
     Route::get('/delete/user/{id}', [AdminController::class, 'delete'])->name('delete-user');
-    Route::get('/user/{id}', [AdminController::class, 'showData'])->name('show-user');
+    Route::get('/user/{id}', [AdminController::class, 'showUserDetail'])->name('show-user');
     Route::post('/update/user/{id}', [AdminController::class, 'updateData'])->name('update-user');
 });
 
