@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PhysicalActivity;
 
+
 class StravaController extends Controller
 {
 
