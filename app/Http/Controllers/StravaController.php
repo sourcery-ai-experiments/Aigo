@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PhysicalActivity;
 
+
 class StravaController extends Controller
 {
 
@@ -42,7 +43,7 @@ class StravaController extends Controller
         if ($authorizationCode) {
             $tokenEndpoint = "https://www.strava.com/oauth/token";
             $clientId = "124405";
-            $clientSecret = "3df0635b0711e098b2e87d5467d9c4596727353d";
+            $clientSecret = "2df5d622c326215c290841fb0ffcdd894274803e";
 
             $response = Http::post($tokenEndpoint, [
                 'client_id' => $clientId,
@@ -52,14 +53,16 @@ class StravaController extends Controller
             ]);
 
             $data = $response->json();
+            //dd($data);
             $accessToken = $data['access_token'];
+            
 
             // Store the access token in the session or database for future API requests
             session(['strava_access_token' => $accessToken]);
             // Redirect the user to the desired page after successful authorization
-
+            
             if (auth()->user()->user_role == 'user') {
-                $this->fetchAthleteActivities();
+                $this->fetchAthleteActivities($data['access_token']);
                 return redirect()->intended(route('dashboard'));
             } else if (auth()->user()->user_role == 'doctor') {
                 // redirect to doctor dashboard (TODO)
@@ -72,7 +75,7 @@ class StravaController extends Controller
         return view('auth.login');
     }
 
-    public function fetchAthleteActivities()
+    public function fetchAthleteActivities($accessToken)
     {
         $accessToken = session('strava_access_token');
     
