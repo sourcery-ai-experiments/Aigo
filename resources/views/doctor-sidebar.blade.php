@@ -26,7 +26,7 @@
       </div>
 
       <div class="dashboard">
-        <a href="{{ route('admin.dashboardAdmin') }}">
+        <a href="{{ route('doctor.dashboard') }}">
           <button type="button" class="btn-dashboard">Dashboard</button>
         </a>
         
@@ -42,35 +42,43 @@
         {{-- SUB-MENU 1: Activity Report --}}
         <div class="btn-group submenu ms-4 ps-2 mb-3">
           <span class="material-symbols-outlined"> monitoring </span>
-          <a href="{{ route('admin.patientList') }}" 
+          <a href="{{ route('doctor.patient-acceptance')}}" 
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Patient List
+            onmouseout="this.style.color='#8296C5'">List Patient
           </a>
         </div>
 
         {{-- SUB-MENU 2: Request Consultation --}}
         <div class="btn-group submenu ms-4 ps-2  mb-3">
           <span class="material-symbols-outlined"> diversity_1 </span>
-          <a href="{{ route('admin.doctorList') }}"
+          <a href="{{ route('health-data.show') }}"
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">Doctor List
+            onmouseout="this.style.color='#8296C5'">Online Consultation
           </a>
         </div>
 
+        {{-- SUB-MENU 3: Consultation Schedule --}}
+        <div class="btn-group submenu ms-4 ps-2  mb-3">
+          <span class="material-symbols-outlined"> calendar_month </span>
+          <a href="{{ route('doctor.schedule') }}"
+            onmouseover="this.style.color='#6FFFE9'" 
+            onmouseout="this.style.color='#8296C5'">My Schedule
+          </a>
+        </div>
 
         {{-- SUB-MENU 4: Transaction --}}
         <div class="btn-group submenu ms-4 ps-2">
           <span class="material-symbols-outlined"> payment </span>
           <a href="{{ route('dashboard') }}"
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'">My Transaction
+            onmouseout="this.style.color='#8296C5'">Transaction
           </a>
         </div>
 
         {{-- MENU 2: SETTINGS --}}
         <div class="menu">
           <aside></aside>
-          <h6>Settings</h6>
+          <h6>Settings & Profile</h6>
         </div>
 
         {{-- SUB-MENU 1: MY PROFILE --}}
@@ -78,7 +86,7 @@
           <span class="material-symbols-outlined"> settings </span>
           <a href=""
             onmouseover="this.style.color='#6FFFE9'" 
-            onmouseout="this.style.color='#8296C5'"> Admin Profile
+            onmouseout="this.style.color='#8296C5'"> My Profile
           </a>
         </div>
 
@@ -117,7 +125,7 @@
         
         <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <a class="logout pt-3" href="">
+          <a class="logout  pt-3" href="">
             <button class="btn-logout">
             <span class="material-symbols-outlined"> logout</span>Log Out</button>
           </a>
