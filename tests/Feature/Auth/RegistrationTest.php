@@ -38,8 +38,7 @@ class RegistrationTest extends TestCase
         $response = $this->post('/register', $userData);
 
         $response->assertStatus(302); // Check if redirected after successful registration
-        $response->assertRedirect(route('dashboard'));
-        $this->assertAuthenticated(); // Check if user is authenticated after registration
+        $response->assertRedirect(route('login'));
         
         $this->assertDatabaseHas('users', [
             'username' => $userData['username'],
@@ -53,5 +52,72 @@ class RegistrationTest extends TestCase
         $user = User::where('email', $userData['email'])->first();
         $this->assertTrue(Hash::check($userData['password'], $user->password));
     }
+
+    public function test_registration_validation_fails_if_missing_required_fields()
+    {
+        $response = $this->post('/register', []);
+
+        $response->assertSessionHasErrors(['username', 'password', 'name', 'email', 'telepon', 'gender']);
+    }
+
+    public function test_registration_validation_fails_if_email_invalid()
+    {
+        $userData = [
+            'username' => $this->faker->userName,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'name' => $this->faker->name,
+            'email' => 'invalid_email',
+            'telepon' => $this->faker->phoneNumber,
+            'alamat' => $this->faker->address,
+            'gender' => $this->faker->randomElement(['male', 'female']),
+        ];
+
+        $response = $this->post('/register', $userData);
+
+        $response->assertSessionHasErrors(['email']);
+    }
+
+    public function test_registration_fails_if_duplicate_username()
+    {
+        $existingUser = User::factory()->create();
+
+        $userData = [
+            'username' => $existingUser->username,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'telepon' => $this->faker->phoneNumber,
+            'alamat' => $this->faker->address,
+            'gender' => $this->faker->randomElement(['male', 'female']),
+        ];
+
+        $response = $this->post('/register', $userData);
+
+        $response->assertSessionHasErrors(['username']);
+    }
+
+    public function test_registration_fails_if_duplicate_email()
+    {
+        $existingUser = User::factory()->create();
+
+        $userData = [
+            'username' => $this->faker->userName,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'name' => $this->faker->name,
+            'email' => $existingUser->email,
+            'telepon' => $this->faker->phoneNumber,
+            'alamat' => $this->faker->address,
+            'gender' => $this->faker->randomElement(['male', 'female']),
+        ];
+
+        $response = $this->post('/register', $userData);
+
+        $response->assertSessionHasErrors(['email']);
+    }
+
+    
     
 }

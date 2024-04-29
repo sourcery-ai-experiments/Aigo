@@ -378,7 +378,7 @@
     display: flex;
     flex-direction: column;
     padding: 39px 57px;
-    margin: 20px 0px 0px 55px;
+    margin: 20px 0px 0px 100px;
 
   }
 
@@ -699,7 +699,7 @@
     align-self: center;
     font: 500 32px Poppins, sans-serif;
   }
-  .appointments-container {
+  .appointment-container {
     border-radius: 15px;
     box-shadow: 0px 10px 50px 4px rgba(138, 161, 203, 0.23);
     border: 1px solid rgba(233, 241, 255, 1);
@@ -707,7 +707,7 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    margin: 20px 0px 20px 55pxpx;
+    margin: 20px 0px 20px 55px;
     padding: 36px 25px;
     width: 90%;
   }

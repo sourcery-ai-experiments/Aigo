@@ -90,7 +90,7 @@
         </div>
         </div>
     </section>
-    <section class="appointments-container">
+    <section class="appointment-container">
     <header class="appointments-header">
         <h2 class="appointments-title">Appointments</h2>
         <a href="#" class="view-more-link">

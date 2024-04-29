@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PhysicalActivity;
 
+
 class StravaController extends Controller
 {
 
@@ -52,7 +53,9 @@ class StravaController extends Controller
             ]);
 
             $data = $response->json();
+            //dd($data);
             $accessToken = $data['access_token'];
+            
 
             // Store the access token in the session or database for future API requests
             session(['strava_access_token' => $accessToken]);
