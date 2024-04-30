@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="shortcut icon" href="{{ asset('/asset/svg/logo.svg') }}" />
       <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
       <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
       <link href="{{ asset('/asset/css/dashboard.css') }}" rel="stylesheet" />

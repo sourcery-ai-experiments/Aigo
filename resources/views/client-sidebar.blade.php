@@ -21,7 +21,7 @@
     <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="container-flex header-logo p-0">
-        <img src="{{ asset('/assets/img/UniShare-logo.png') }}" alt="" style="height: 36px; " >
+        <img src="{{ asset('/asset/svg/logo-white.svg') }}" alt="" style="height: 36px; " >
         <h4 style="color: #F6F7FF" class="ms-2 mt-2"> Aigo </h4>
       </div>
 
