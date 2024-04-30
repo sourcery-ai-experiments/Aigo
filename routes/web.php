@@ -23,6 +23,37 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/dashboardAdmin', function () {
+        return view('dashboardAdmin');
+    })->name('admin.dashboardAdmin');
+
+    Route::get('/patientList', function () {
+        return view('patient-list');
+    })->name('admin.patientList');
+
+    Route::get('/doctorList', function () {
+        return view('doctor-list');
+    })->name('admin.doctorList');
+});
+
+Route::group(['prefix' => 'doctor'], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboardDoctor');
+    })->name('doctor.dashboard');
+
+    Route::get('/patient-acceptance', function () {
+        return view('acceptance-patients');
+    })->name('doctor.patient-acceptance');
+
+    Route::get('/schedule', function () {
+        return view('doctor-schedule');
+    })->name('doctor.schedule');
+});
+
+
+
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 
