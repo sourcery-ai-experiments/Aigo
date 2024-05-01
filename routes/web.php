@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Consultation;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -24,6 +25,9 @@ Route::get('/contact', function () {
 });
 
 
+Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
+Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboardAdmin', function () {
         return view('dashboardAdmin');
@@ -38,25 +42,6 @@ Route::group(['prefix' => 'admin'], function () {
     })->name('admin.doctorList');
 });
 
-Route::group(['prefix' => 'doctor'], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboardDoctor');
-    })->name('doctor.dashboard');
-
-    Route::get('/patient-acceptance', function () {
-        return view('acceptance-patients');
-    })->name('doctor.patient-acceptance');
-
-    Route::get('/schedule', function () {
-        return view('doctor-schedule');
-    })->name('doctor.schedule');
-});
-
-
-
-Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
-Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
-
 // 1. CLIENT PAGES
 Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], function () {
     // DASHBOARD CONTROLLER
@@ -68,6 +53,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], funct
     Route::get('/health-data', [ConsultationController::class, 'showHealthDataForm'])->name('health-data.show');
     Route::post('/health-data', [ConsultationController::class, 'storeHealthDataForm'])->name('health-data.store');
     Route::get('/jadwal', [ConsultationController::class, 'showJadwalForm'])->name('jadwal.show');
+    Route::post('/consultation', [ConsultationController::class, 'storeConsultation'])->name('consultation.store');
 });
 
 
@@ -81,7 +67,20 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/update/user/{id}', [AdminController::class, 'updateData'])->name('update-user');
 });
 
+// 3. DOCTOR PAGES
+Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboardDoctor');
+    })->name('doctor.dashboard');
 
+    Route::get('/patient-acceptance', function () {
+        return view('acceptance-patients');
+    })->name('doctor.patient-acceptance');
+
+    Route::get('/schedule', function () {
+        return view('doctor-schedule');
+    })->name('doctor.schedule');
+});
 
 
 Route::middleware('auth')->group(function () {
