@@ -1,4 +1,4 @@
-<p align="center"><a href="https://aigo.flxnzz.my.id" target="_blank"><img src="logo.svg" width=500 alt="AIGO Logo"></a></p>
+<p align="center"><a href="https://aigo.flxnzz.my.id" target="_blank"><img src="public/asset/png/logo.svg" width=500 alt="AIGO Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -18,7 +18,7 @@
 
 ## Overview
 
-<p align="center"><a href="https://aigo.flxnzz.my.id" target="_blank"><img src="web.png" width=800 alt="AIGO Logo"></a></p>
+![Aigo Web](public/asset/png/web.png)
 
 AIGO is an AI-powered guidance system designed to assist in the management of obesity. This innovative platform leverages the power of Internet of Things (IoT) devices, specifically smartwatches, to gain valuable insights into your daily activities. Aigo provides personalized recommendations for weight management, nutrition, and exercise.
 
@@ -51,16 +51,6 @@ To set up and utilize our platform, follow these steps:
 
 -   Access personalized recommendations based on your health data and activity progress
 
-## Data Privacy and Security
-
-To provide you with the most personalized experience possible, AIGO offers features that connect with your [**Strava account**](https://support.strava.com/hc/en-us/articles/360018969732-App-Authorization-Settings). We understand data privacy is important, and we want to assure you that your information is secure.
-
--   By authorizing your [**Strava account**](https://support.strava.com/hc/en-us/articles/360018969732-App-Authorization-Settings), you're enabling us to provide you a personalized experience while ensuring the security and protection of your data.
--   We only access data relevant to your AIGO experience.
--   We're committed to transparency in how we handle your data, and we will never misuse or share it without your explicit consent.
-
-Your trust is paramount to us, and we're dedicated to upholding the highest standards of data privacy and security in everything we do.
-
 ## Contributors
 
 We appreciate the dedication and contributions of the following individuals to this project:
@@ -79,14 +69,8 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 -   AIGO was developed to address the growing need for personalized health management solutions.
 -   Special thanks to all contributors and open-source libraries used in the development of AIGO.
 
-## License
-
-This project is licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software"""
-
 ---
 
-> Aigo [aigo.flxnzz.my.id](http://aigo.flxnzz.my.id/) &nbsp;&middot;&nbsp;
+> Aigo [aigo.w333zard.my.id](http://aigo.w333zard.my.id/) &nbsp;&middot;&nbsp;
 > GitHub [@W-zrd](https://github.com/W-zrd) &nbsp;&middot;&nbsp;
 > Medium [@w333zard](https://medium.com/@flxnzz_47)

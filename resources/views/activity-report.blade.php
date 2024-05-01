@@ -4,12 +4,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta property="og:title" content="Aigo@w33zard" />
+        <meta property="og:description" content="AIGO: AI-recommended Guidance for Obesity management " />
+        <meta property="og:image" content="{{ asset('/asset/png/thumbnail.png') }}"/>
+        <meta property="og:url" content="https://aigo.w333zard.my.id/" />
+        <link rel="shortcut icon" href="{{ asset('/asset/svg/logo.svg') }}" />
+
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
         <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
         <link href="{{ asset('/asset/css/activity-report.css') }}" rel="stylesheet" />
         <link href="{{ asset('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  
         <title>Activity Report</title>
      </head>
    <body>

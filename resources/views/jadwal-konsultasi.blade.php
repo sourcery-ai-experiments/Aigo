@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="shortcut icon" href="{{ asset('/asset/svg/logo.svg') }}" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
       <link href="{{ asset('/asset/main.css') }}" rel="stylesheet" />
@@ -71,46 +72,58 @@
                </div>
             </div>
             <div class="event-form p-5 me-5 ms-5 mt-4">
-               <form action="{{route('health-data.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{ route('consultation.store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   {{-- ROW 1 --}}
                   <div class="row">
-                     {{-- Pilih Dokter --}}
+                     
+                     {{-- PILIH DOKTER --}}
                      <div class="col">
-                        <div class="mb-3">
-                           <label for="birthdate" class="form-label">Pilih Dokter</label>
-                           <div class="input-group date" id="birthdatePicker" data-target-input="nearest">
-                               <input type="text" class="form-control datetimepicker-input" id="birthdate" name="birthdate" style="border-radius: 20px" data-target="#birthdatePicker" placeholder="Pilih Dokter yang tersedia" value="{{ old('birthdate', $healthData->birthdate ?? '') }}"/>
-                               <div class="input-group-append" data-target="#birthdatePicker" data-toggle="datetimepicker">
-                               </div>
-                           </div>
-                       </div>
+                         <div class="mb-3">
+                             <label for="doctor_id" class="form-label">Pilih Dokter</label>
+                             <select class="form-select" name="doctor_id" id="doctor_id" aria-label="doctor_id" style="border-radius: 20px">
+                                 @foreach ($doctors as $doctor)
+                                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                 @endforeach
+                             </select>
+                             @error('doctor_id')
+                                 <p class="alert alert-danger shadow-sm">{{ $message }}</p>
+                             @enderror
+                         </div>
                      </div>
-                     {{-- Tanggal Konsultasi --}}
+
+                     {{-- TANGGAL KONSULTASI --}}
                      <div class="col">
-                        <div class="mb-3">
-                           <label for="weight" class="form-label">Tanggal Konsultasi</label>
-                           <input value="{{old('weight', $healthData->weight ?? '')}}" type="text" class="form-control" name="weight" id="weight" aria-describedby="weightHelp" style="border-radius: 20px" placeholder="Pilih jadwal konsultasi dengan dokter">
-                        </div>
+                         <div class="mb-3">
+                             <label for="consultation_date" class="form-label">Tanggal Konsultasi</label>
+                             <div class="input-group date" id="consultationDatePicker" data-target-input="nearest">
+                                 <input type="text" class="form-control datetimepicker-input" id="consultation_date" name="consultation_date" style="border-radius: 20px" data-target="#consultationDatePicker" placeholder="Pilih Tanggal Konsultasi" value="{{ old('consultation_date') }}"/>
+                                 <div class="input-group-append" data-target="#consultationDatePicker" data-toggle="datetimepicker">
+                                 </div>
+                             </div>
+                         </div>
                      </div>
                   </div>
+
                   {{-- ROW 2 --}}
                   <div class="row">
-                     {{-- Jam Konsultasi --}}
+
+                     {{-- JAM KONSULTASI --}}
                      <div class="col">
-                        <div class="mb-3">
-                           <label for="height" class="form-label">Jam Konsultasi</label>
-                           <input value="{{old('height', $healthData->height ?? '')}}" type="text" class="form-control" id="height" name="height" aria-describedby="heightHelp" style="border-radius: 20px" placeholder="Pilih jam konsultasi dengan dokter">
-                        </div>
+                         <div class="mb-3">
+                             <label for="consultation_time" class="form-label">Jam Konsultasi</label>
+                             <input value="{{ old('consultation_time') }}" type="time" class="form-control" id="consultation_time" name="consultation_time" aria-describedby="consultationTimeHelp" style="border-radius: 20px" placeholder="Pilih jam konsultasi dengan dokter">
+                         </div>
                      </div>
-                     {{-- Upload Transkrip Hasil--}}
+
+                     {{-- LOKASI KONSULTASI --}}
                      <div class="col">
-                        <div class="mb-3">
-                           <label for="sleeptime" class="form-label">Upload Transkrip Hasil</label>
-                           <input value="{{old('sleeptime', $healthData->sleeptime ?? '')}}" type="text" class="form-control" name="sleeptime" id="sleeptime" aria-describedby="sleeptimeHelp" style="border-radius: 20px" placeholder="8">
-                        </div>
+                         <div class="mb-3">
+                             <label for="location" class="form-label">Lokasi Konsultasi</label>
+                             <input value="{{ old('location') }}" type="text" class="form-control" name="location" id="location" aria-describedby="locationHelp" style="border-radius: 20px" placeholder="Masukkan lokasi konsultasi">
+                         </div>
                      </div>
-                  </div>
+                 </div>
                   <div class="row justify-content-end mt-5">
                      <div class="col-auto">
                         <button class="btn btn-primary" type="submit">Submit</button>
@@ -125,7 +138,7 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       <script>
          $(function () {
-             $('#birthdatePicker').datepicker({
+             $('#consultationDatePicker').datepicker({
                  format: 'yyyy-mm-dd',
                  autoclose: true,
                  todayHighlight: true

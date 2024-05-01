@@ -4,6 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta property="og:title" content="Aigo@w33zard" />
+        <meta property="og:description" content="AIGO: AI-recommended Guidance for Obesity management " />
+        <meta property="og:image" content="{{ asset('/asset/png/thumbnail.png') }}"/>
+        <meta property="og:url" content="https://aigo.w333zard.my.id/" />
+        <link rel="shortcut icon" href="{{ asset('/asset/svg/logo.svg') }}" />
 
         <title>Login</title>
 

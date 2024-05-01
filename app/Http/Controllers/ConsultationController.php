@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\HealthData;
-use App\Models\JadwalKonsultasi;
+use App\Models\User;
+use App\Models\Consultation;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -32,18 +33,30 @@ class ConsultationController extends Controller
             ]
         );
         return redirect()->route('jadwal.show');
-        //return redirect()->route('result')->with('success', 'Health data updated successfully.');
     }
 
 
     public function showJadwalForm()
     {
         $user = auth()->user();
-        $jadwal = JadwalKonsultasi::where('patient_id', $user->id)->first();
-
-        return view('jadwal-konsultasi', compact('jadwal'));
+        $doctors = User::where('user_role', 'doctor')->get();
+        return view('jadwal-konsultasi', compact('doctors'));
     }
 
+    public function storeConsultation(Request $request)
+    {
+        $user = auth()->user();
     
+        $data = Consultation::create([
+            'patient_id' => $user->id,
+            'doctor_id' => $request->input('doctor_id'),
+            'consultation_date' => Carbon::parse($request->input('consultation_date'))->format('Y-m-d'),
+            'consultation_time' => $request->input('consultation_time'),
+            'location' => $request->input('location'),
+            'consultation_status' => 'pending',
+        ]);
+        return view("jadwal-konsultasi");
+        //return redirect()->route('consultation.success');
+    }
     
 }   
