@@ -15,8 +15,10 @@ class AdminController extends Controller
         return view('doctor-list', ["data" => User::where('user_role', 'doctor')->get()]);
     }
 
-    public function showPatient(Request $request){
-        return view('patient-list', ["data" => User::where('user_role', 'user')->get()]);
+    public function showPatient(Request $request)
+    {
+        $data = User::where('user_role', 'user')->get();
+        return view('patient-list')->with('data', $data);
     }
 
     public function showUserDetail($id){

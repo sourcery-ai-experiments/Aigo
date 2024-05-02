@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->date('birthdate');
             $table->float('weight');
-            $table->integer('height');
+            $table->float('height');
             $table->integer('sleeptime');
-            $table->string('disease');
-            $table->string('food');
-            $table->string('obesity_status')->nullable()->change();
+            $table->string('disease')->nullable();
+            $table->string('food')->nullable();
+            $table->string('obesity_status')->nullable();
             $table->timestamps();
         });
     }

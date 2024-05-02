@@ -7,6 +7,7 @@ use App\Http\Controllers\StravaController;
 use App\Models\PhysicalActivity;
 use App\Models\HealthData;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
@@ -30,7 +31,8 @@ class DashboardController extends Controller
         $currentMonth = now()->format('m');
         $currentYear = now()->format('Y');
     
-        $healthData = HealthData::where('users_id', auth()->user()->id)->get();
+        $user = auth()->user();
+        $healthData = HealthData::where('users_id', $user->id)->get();
     
         // Format created_at dates
         $healthData->transform(function ($item) {
@@ -41,7 +43,7 @@ class DashboardController extends Controller
     
         $activities = PhysicalActivity::whereYear('date', $currentYear)
             ->whereMonth('date', $currentMonth)
-            ->where('users_id', auth()->user()->id)
+            ->where('users_id', $user->id)
             ->get();
     
         $totalSteps = $activities->sum('avg_steps');
@@ -52,10 +54,33 @@ class DashboardController extends Controller
         if ($healthData->count() > 0) {
             $averageSleepTime = number_format($totalSleepTime / $healthData->count(), 2);
         } else {
-            $averageSleepTime = 0; // Handle the case when there's no sleep data for the month
+            $averageSleepTime = 0; 
         }
     
-        return view('activity-report', compact('totalSteps', 'totalDistance', 'totalDuration', 'averageSleepTime', 'healthData', 'activities'));
+        $latestHealthData = $healthData->last();
+        if ($latestHealthData) {
+            $height = $latestHealthData->height;
+            $weight = $latestHealthData->weight;
+            $birthdate = $latestHealthData->birthdate;
+            $age = Carbon::parse($birthdate)->age;
+        } else {
+            $height = $user->height ?? 0;
+            $weight = $user->weight ?? 0;
+            $age = 0;
+        }
+        $gender = $user->gender === 'Male' ? 'M' : 'F';
+    
+        $response = Http::post('http://localhost:5000/predict_calories', [
+            'height' => $height,
+            'weight' => $weight,
+            'age' => $age,
+            'gender' => $gender,
+        ]);
+        $predictedCalories = $response->json()['predicted_calories'];
+    
+        return view('activity-report',
+            compact('totalSteps', 'totalDistance', 'totalDuration', 'averageSleepTime', 'healthData', 'activities', 'predictedCalories')
+        );
     }
     
 
