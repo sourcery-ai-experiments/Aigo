@@ -1,5 +1,7 @@
 <?php
 
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
@@ -7,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\StravaController;
+use App\Http\Controllers\Api\HealthDataAPIController;
+use App\Http\Controllers\Api\UserAPIController;
 use App\Http\Middleware\RedirectBasedOnRole;
 
 
@@ -58,5 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth')->get('/api/current-user-id', function () {
+    return response()->json(['user_id' => Auth::id()]);
+});
+
+Route::get('/user/{id}', [UserAPIController::class, 'getUser']);
+Route::get('/health-data/{userId}', [HealthDataAPIController::class, 'getHealthData']);
 
 require __DIR__.'/auth.php';
