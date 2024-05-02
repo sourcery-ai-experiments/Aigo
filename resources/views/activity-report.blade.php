@@ -91,7 +91,7 @@
                               <div class="calories-header">
                                 <p class="calories-label">Calories (cal)</p>
                                 <p class="calories-value">
-                                  1020 <span class="calories-total">/{{$predictedCalories}}</span>
+                                  1020 <span class="calories-total"> / {{ $predictedCalories }}</span>
                                 </p>
                               </div>
                               <div class="progress calories-progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">

@@ -23,8 +23,34 @@ class DashboardController extends Controller
             $activity->calories_burned = $activity->calculateCaloriesBurned();
             return $activity;
         });
-        return view('dashboardClient', compact('activities', 'healthData'));
+        // Predictions
+        $obesityPrediction = $this->predictObesity($healthData, $user); // Call prediction method
+        // You can add prediction for calories as well if needed
+
+        return view('dashboardClient', compact('activities', 'healthData', 'obesityPrediction'));
     }
+    
+    // Method to predict obesity
+    private function predictObesity($healthData, $user)
+    {
+        // Prepare data for prediction
+        $data = [
+            'height' => $healthData->height,
+            'weight' => $healthData->weight,
+            'age' => now()->diffInYears($healthData->birthdate),
+            'gender' => ($user->gender === 'male') ? 'M' : 'F',
+            'activity_level' => 1, // Static for now, you can change it if needed
+        ];
+
+        // Send data to Flask for prediction
+        $obesityPrediction = Http::post('http://localhost:5000/api/predict/obesity', $data)->json();
+        // Extract only the predicted category from the response
+        $predictedCategory = $obesityPrediction['predicted_category'] ?? null;
+        // dd($predictedCategory);
+
+        return $predictedCategory;
+    }
+
 
     public function activityReport()
     {
@@ -70,13 +96,14 @@ class DashboardController extends Controller
         }
         $gender = $user->gender === 'Male' ? 'M' : 'F';
     
-        $response = Http::post('http://localhost:5000/predict_calories', [
+        $response = Http::post('http://localhost:5000/api/predict/calorie', [
             'height' => $height,
             'weight' => $weight,
             'age' => $age,
             'gender' => $gender,
         ]);
-        $predictedCalories = $response->json()['predicted_calories'];
+        // dd($height, $weight, $age, $gender);
+        $predictedCalories = ceil($response->json()['predicted_calories']);
     
         return view('activity-report',
             compact('totalSteps', 'totalDistance', 'totalDuration', 'averageSleepTime', 'healthData', 'activities', 'predictedCalories')

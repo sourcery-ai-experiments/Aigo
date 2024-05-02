@@ -53,7 +53,7 @@
                              
                              <div class="obesity-status">
                                <span class="obesity-label">Obesity Status</span>
-                               <span class="obesity-value">Normal</span>
+                               <span class="obesity-value">{{ $obesityPrediction ?? 'N/A'}}</span>
                              </div>
                            </div>
                          </section>
@@ -179,5 +179,11 @@
          </div>
       </div>
       <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+      {{-- <script>
+         // Ambil nilai obesityPrediction dari PHP dan pasang ke elemen HTML yang sesuai
+         var obesityPrediction = "{{ $obesityPrediction }}";
+         document.getElementById('obesityValue').innerText = obesityPrediction;
+      </script> --}}
    </body>
 </html>
