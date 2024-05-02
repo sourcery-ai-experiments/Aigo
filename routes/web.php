@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\StravaController;
 use App\Http\Controllers\Api\HealthDataAPIController;
