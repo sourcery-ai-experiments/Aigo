@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
-// DashboardController.php
 
     public function dashboardClient()
     {
@@ -26,13 +25,11 @@ class DashboardController extends Controller
             return $activity;
         });
 
-        // Predictions
         if ($healthData) {
             // Check if obesity_status is null
             if (!$healthData->obesity_status) {
                 // Call prediction method only if obesity_status is null
                 $obesityPrediction = $this->predictObesity($healthData, $user);
-                // Update the obesity_status with the predicted value
                 $healthData->obesity_status = $obesityPrediction;
                 $healthData->save();
             }
@@ -41,7 +38,6 @@ class DashboardController extends Controller
             if (!$healthData->calorie_recommendation) {
                 // Call calorie prediction method only if calorie_recommendation is null
                 $calorieRecommendation = $this->predictCalories($healthData, $user);
-                // Update the calorie_recommendation with the predicted value
                 $healthData->calorie_recommendation = $calorieRecommendation;
                 $healthData->save();
             }
@@ -50,30 +46,23 @@ class DashboardController extends Controller
         return view('dashboardClient', compact('activities', 'healthData'));
     }
     
-    // Method to predict obesity
     private function predictObesity($healthData, $user)
     {
-        // Prepare data for prediction
         $data = [
             'height' => $healthData->height ?? 0,
             'weight' => $healthData->weight ?? 0,
             'age' => now()->diffInYears($healthData->birthdate ?? '2000-03-25'),
             'gender' => ($user->gender === 'male') ? 'M' : 'F',
-            'activity_level' => 1, // Static for now, you can change it if needed
+            'activity_level' => 1,
         ];
 
-        // Send data to Flask for prediction aigo-api.w333zard.my.id
         $obesityPrediction = Http::post('https://aigo-api.w333zard.my.id/api/predict/obesity', $data)->json();
-        // Extract only the predicted category from the response
         $predictedCategory = $obesityPrediction['predicted_category'] ?? null;
-        // dd($predictedCategory);
-
         return $predictedCategory;
     }
 
     private function predictCalories($healthData, $user)
     {
-        // Prepare data for prediction
         $data = [
             'height' => $healthData->height ?? 0,
             'weight' => $healthData->weight ?? 0,
@@ -81,7 +70,6 @@ class DashboardController extends Controller
             'gender' => ($user->gender === 'male') ? 'M' : 'F',
         ];
     
-        // Send data to Flask for prediction
         $response = Http::post('https://aigo-api.w333zard.my.id/api/predict/calorie', $data);
         $predictedCalories = ceil($response->json()['predicted_calories']);
     
@@ -98,7 +86,6 @@ class DashboardController extends Controller
         ->orderBy('updated_at', 'desc')
         ->get();
 
-        // Format created_at dates
         $healthData->transform(function ($item) {
             $item->formatted_created_at = Carbon::parse($item->created_at)->format('d F Y');
             $item->time = Carbon::parse($item->created_at)->format('h:i A');
@@ -114,7 +101,6 @@ class DashboardController extends Controller
         $totalDistance = $activities->sum('distance');
         $totalDuration = $activities->sum('duration');
 
-        // Determine the duration unit and value
         if ($totalDuration < 60) {
             $durationValue = $totalDuration;
             $durationUnit = 'seconds';
@@ -126,7 +112,6 @@ class DashboardController extends Controller
             $durationUnit = 'hours';
         }
 
-        // Calculate weight differences and exclude entries with the same weight
         $filteredHealthData = collect();
         foreach ($healthData as $index => $data) {
             if ($index < $healthData->count() - 1) {

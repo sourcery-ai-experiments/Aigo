@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Consultation;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -62,13 +63,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 // 3. DOCTOR PAGES
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboardDoctor');
-    })->name('doctor.dashboard');
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard')->middleware('role');
 
-    Route::get('/patient-acceptance', function () {
-        return view('acceptance-patients');
-    })->name('doctor.patient-acceptance');
+    Route::get('/patient-acceptance', [DoctorController::class, 'patientAcceptance'])->name('doctor.patient-acceptance');
 
     Route::get('/schedule', function () {
         return view('doctor-schedule');

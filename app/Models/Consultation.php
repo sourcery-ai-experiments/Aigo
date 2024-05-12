@@ -14,7 +14,7 @@ class Consultation extends Model
         'consultation_date',
         'consultation_time',
         'location',
-        'consult_status',
+        'consultation_status',
     ];
 
     public function patient()
