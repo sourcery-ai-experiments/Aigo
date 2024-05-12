@@ -26,7 +26,7 @@
       </div>
 
       <div class="dashboard">
-        <a href="{{ route('admin.dashboardAdmin') }}">
+        <a href="{{ route('admin.dashboard') }}">
           <button type="button" class="btn-dashboard">Dashboard</button>
         </a>
         

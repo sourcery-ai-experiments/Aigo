@@ -33,19 +33,7 @@ Route::get('/contact', function () {
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/dashboardAdmin', function () {
-        return view('dashboardAdmin');
-    })->name('admin.dashboardAdmin');
 
-    Route::get('/patientList', function () {
-        return view('patient-list');
-    })->name('admin.patientList');
-
-    Route::get('/doctorList', function () {
-        return view('doctor-list');
-    })->name('admin.doctorList');
-});
 
 // 1. CLIENT PAGES
 Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], function () {

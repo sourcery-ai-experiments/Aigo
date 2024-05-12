@@ -32,7 +32,7 @@
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2d3fda8ac829174dd9d1dbcd455ce585419418563fcfc03fd18834062dbbd174?apiKey=e644a539de5445e499b1d21950fa439b&" alt="Doctor Total Icon" class="doctor-total-icon" loading="lazy" />
                 <div class="doctor-total-label">Doctor Total</div>
             </header>
-            <p class="doctor-total-value">21</p>
+            <p class="doctor-total-value">{{ $doctorCount }}</p>
             </div>
           </div>
           <div class="col-md-6">
@@ -41,7 +41,7 @@
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3f7f8b8cc3c9387ef6438d10c3f8a38d3edcc47cc661ab6290ec0208ac5ed169?apiKey=e644a539de5445e499b1d21950fa439b&" alt="Patient icon" class="patient-icon" />
               <div class="patient-total-label">Patient Total</div>
             </header>
-            <p class="patient-total-value">47</p>
+            <p class="patient-total-value">{{ $patientCount }}</p>
           </div>
           </div>
         </div>
@@ -70,9 +70,9 @@
               </div>
               <div class="gender-labels">
                   <div class="gender-label">Male</div>
-                  <div class="gender-count">28</div>
+                  <div class="gender-count">{{ $maleCount }}</div>
                   <div class="gender-label female-label">Female</div>
-                  <div class="gender-count">19</div>
+                  <div class="gender-count">{{ $femaleCount }}</div>
               </div>
               </div>
           </div>
@@ -88,9 +88,9 @@
               </div>
               <div class="bmi-labels">
                   <div class="bmi-label">Normal</div>
-                  <div class="bmi-count">34</div>
+                  <div class="bmi-count">{{ $normalCount }}</div>
                   <div class="bmi-label obesity-label">Obesity</div>
-                  <div class="bmi-count obesity-count">13</div>
+                  <div class="bmi-count obesity-count">{{ $obesityCount }}</div>
               </div>
               </div>
           </div>
@@ -127,47 +127,47 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
    
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
     <script>
-    // Ambil referensi ke elemen canvas
-    var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+      var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+  
+      var userRoleCounts = @json($userRoleCounts);
+  
+      var labels = userRoleCounts.map(function(item) {
+          return item.user_role;
+      });
+  
+      var data = userRoleCounts.map(function(item) {
+          return item.count;
+      });
+  
+      var chartData = {
+          labels: labels,
+          datasets: [{
+              data: data,
+              backgroundColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(54, 162, 235)',
+                  'rgb(255, 205, 86)'
+              ],
+              hoverOffset: 4
+          }]
+      };
+  
+      var myDoughnutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: chartData,
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }
+      });
+  </script>
 
-    // Data untuk pie chart
-    const data = {
-      labels: [
-        'Admin',
-        'Doctor',
-        'Patient'
-      ],
-      datasets: [{
-        label: 'My First Dataset',
-        data: [50, 10, 300],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
-        hoverOffset: 4
-      }]
-    };
-
-    const config = {
-      type: 'doughnut',
-      data: data,
-    };
-    // Buat objek doughnut chart baru
-    var myDoughnutChart = new Chart(ctx, {
-        type: 'doughnut', // Jenis chart (pie chart)
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom' // Posisi legenda chart (top, bottom, left, right)
-                }
-            }
-        }
-    });
-</script>
 <script>
 var ctxStatistics = document.getElementById('statisticsChart').getContext('2d');
 
@@ -175,7 +175,7 @@ const dataStatistics = {
   labels: ['Obesity','Normal'],
   datasets: [{
     label: 'Statistics Chart',
-    data: [300, 100],
+    data: [300, 100], // data: [{{ $obesityCount }}, {{ $normalCount }}], 
     backgroundColor: [
       'rgb(255, 99, 132)',
       'rgb(54, 162, 235)'

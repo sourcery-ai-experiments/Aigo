@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('disease')->nullable();
             $table->string('food')->nullable();
             $table->string('obesity_status')->nullable();
+            $table->integer('calorie_recommendation')->nullable();
             $table->timestamps();
         });
     }

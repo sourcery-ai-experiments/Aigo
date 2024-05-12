@@ -59,8 +59,8 @@
                             <div class="summary-text">Duration</div>
                         </div>
                         <div class="summary-details">
-                            <div class="summary-count" style="color: #384C7F;">{{ $totalDuration }}</div>
-                            <div class="summary-unit">Minutes</div>
+                            <div class="summary-count" style="color: #384C7F;">{{ $durationValue }}</div>
+                            <div class="summary-unit">{{ ucfirst($durationUnit) }}</div>
                         </div>
                     </div>
                 </div>
@@ -139,18 +139,27 @@
                 <div class="col-4">
                     <div class="activity-container mt-5 mb-5 p-4 row">
                         <h5>Weight Tracking</h5>
-                        @foreach ($healthData as $data)
+                        @php
+                            $previousWeight = null;
+                        @endphp
+
+                        @foreach ($filteredHealthData as $data)
                             <div class="weight-card">
                                 <div class="weight-info">
-                                <div class="date">{{ $data->formatted_created_at }}</div>
-                                <div class="weight">{{ $data->weight }} kg</div>
+                                    <div class="date">{{ $data->formatted_created_at }}</div>
+                                    <div class="weight">{{ $data->weight }} kg</div>
                                 </div>
                                 <div class="weight-details">
-                                <div class="time">{{ $data->time }}</div>
-                                <div class="weight-change mt-3">
-                                    <div class="change-value">+0.1 kg</div>
-                                    {{-- <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7f3887f4d121b10bfa02e0a23f6b263cd497e43ef647e49fdbcafc1dbf6a7206?apiKey=625eee6d30e949eaaf4a2416dcbead7b&" alt="Weight change icon" class="change-icon" /> --}}
-                                </div>
+                                    <div class="time">{{ $data->time }}</div>
+                                    <div class="weight-change mt-3">
+                                        @if ($data->weight_difference > 0)
+                                            <div class="change-value text-danger">+{{ $data->weight_difference }} kg</div>
+                                        @elseif ($data->weight_difference < 0)
+                                            <div class="change-value text-success">{{ $data->weight_difference }} kg</div>
+                                        @else
+                                            <div class="change-value text-body-tertiary">{{ $data->weight_difference }} kg</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

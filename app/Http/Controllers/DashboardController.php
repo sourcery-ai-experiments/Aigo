@@ -11,23 +11,43 @@ use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
+// DashboardController.php
+
     public function dashboardClient()
     {
         $user = auth()->user();
-    
+
         $activities = PhysicalActivity::where('users_id', $user->id)->get();
         $healthData = HealthData::where('users_id', $user->id)->get()->last();
-    
+
         $activities->transform(function ($activity) {
             $activity->date = Carbon::parse($activity->date)->format('d M Y');
             $activity->calories_burned = $activity->calculateCaloriesBurned();
             return $activity;
         });
-        // Predictions
-        $obesityPrediction = $this->predictObesity($healthData, $user); // Call prediction method
-        // You can add prediction for calories as well if needed
 
-        return view('dashboardClient', compact('activities', 'healthData', 'obesityPrediction'));
+        // Predictions
+        if ($healthData) {
+            // Check if obesity_status is null
+            if (!$healthData->obesity_status) {
+                // Call prediction method only if obesity_status is null
+                $obesityPrediction = $this->predictObesity($healthData, $user);
+                // Update the obesity_status with the predicted value
+                $healthData->obesity_status = $obesityPrediction;
+                $healthData->save();
+            }
+    
+            // Check if calorie_recommendation is null
+            if (!$healthData->calorie_recommendation) {
+                // Call calorie prediction method only if calorie_recommendation is null
+                $calorieRecommendation = $this->predictCalories($healthData, $user);
+                // Update the calorie_recommendation with the predicted value
+                $healthData->calorie_recommendation = $calorieRecommendation;
+                $healthData->save();
+            }
+        }
+    
+        return view('dashboardClient', compact('activities', 'healthData'));
     }
     
     // Method to predict obesity
@@ -35,15 +55,15 @@ class DashboardController extends Controller
     {
         // Prepare data for prediction
         $data = [
-            'height' => $healthData->height,
-            'weight' => $healthData->weight,
-            'age' => now()->diffInYears($healthData->birthdate),
+            'height' => $healthData->height ?? 0,
+            'weight' => $healthData->weight ?? 0,
+            'age' => now()->diffInYears($healthData->birthdate ?? '2000-03-25'),
             'gender' => ($user->gender === 'male') ? 'M' : 'F',
             'activity_level' => 1, // Static for now, you can change it if needed
         ];
 
-        // Send data to Flask for prediction
-        $obesityPrediction = Http::post('http://localhost:5000/api/predict/obesity', $data)->json();
+        // Send data to Flask for prediction aigo-api.w333zard.my.id
+        $obesityPrediction = Http::post('https://aigo-api.w333zard.my.id/api/predict/obesity', $data)->json();
         // Extract only the predicted category from the response
         $predictedCategory = $obesityPrediction['predicted_category'] ?? null;
         // dd($predictedCategory);
@@ -51,6 +71,22 @@ class DashboardController extends Controller
         return $predictedCategory;
     }
 
+    private function predictCalories($healthData, $user)
+    {
+        // Prepare data for prediction
+        $data = [
+            'height' => $healthData->height ?? 0,
+            'weight' => $healthData->weight ?? 0,
+            'age' => now()->diffInYears($healthData->birthdate ?? '2000-03-25'),
+            'gender' => ($user->gender === 'male') ? 'M' : 'F',
+        ];
+    
+        // Send data to Flask for prediction
+        $response = Http::post('https://aigo-api.w333zard.my.id/api/predict/calorie', $data);
+        $predictedCalories = ceil($response->json()['predicted_calories']);
+    
+        return $predictedCalories;
+    }
 
     public function activityReport()
     {
@@ -58,8 +94,10 @@ class DashboardController extends Controller
         $currentYear = now()->format('Y');
     
         $user = auth()->user();
-        $healthData = HealthData::where('users_id', $user->id)->get();
-    
+        $healthData = HealthData::where('users_id', $user->id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
+
         // Format created_at dates
         $healthData->transform(function ($item) {
             $item->formatted_created_at = Carbon::parse($item->created_at)->format('d F Y');
@@ -75,6 +113,33 @@ class DashboardController extends Controller
         $totalSteps = $activities->sum('avg_steps');
         $totalDistance = $activities->sum('distance');
         $totalDuration = $activities->sum('duration');
+
+        // Determine the duration unit and value
+        if ($totalDuration < 60) {
+            $durationValue = $totalDuration;
+            $durationUnit = 'seconds';
+        } elseif ($totalDuration < 3600) {
+            $durationValue = floor($totalDuration / 60);
+            $durationUnit = 'minutes';
+        } else {
+            $durationValue = floor($totalDuration / 3600);
+            $durationUnit = 'hours';
+        }
+
+        // Calculate weight differences and exclude entries with the same weight
+        $filteredHealthData = collect();
+        foreach ($healthData as $index => $data) {
+            if ($index < $healthData->count() - 1) {
+                $nextWeight = $healthData[$index + 1]->weight;
+                $data->weight_difference = $data->weight - $nextWeight;
+                if ($data->weight_difference != 0) {
+                    $filteredHealthData->push($data);
+                }
+            } else {
+                $data->weight_difference = 0;
+                $filteredHealthData->push($data);
+            }
+        }
     
         $totalSleepTime = $healthData->sum('sleeptime');
         if ($healthData->count() > 0) {
@@ -85,29 +150,15 @@ class DashboardController extends Controller
     
         $latestHealthData = $healthData->last();
         if ($latestHealthData) {
-            $height = $latestHealthData->height;
-            $weight = $latestHealthData->weight;
-            $birthdate = $latestHealthData->birthdate;
-            $age = Carbon::parse($birthdate)->age;
+            $predictedCalories = $this->predictCalories($latestHealthData, $user);
         } else {
-            $height = $user->height ?? 0;
-            $weight = $user->weight ?? 0;
-            $age = 0;
+            $predictedCalories = 0;
         }
-        $gender = $user->gender === 'Male' ? 'M' : 'F';
-    
-        $response = Http::post('http://localhost:5000/api/predict/calorie', [
-            'height' => $height,
-            'weight' => $weight,
-            'age' => $age,
-            'gender' => $gender,
-        ]);
-        // dd($height, $weight, $age, $gender);
-        $predictedCalories = ceil($response->json()['predicted_calories']);
     
         return view('activity-report',
-            compact('totalSteps', 'totalDistance', 'totalDuration', 'averageSleepTime', 'healthData', 'activities', 'predictedCalories')
-        );
+        compact(
+            'totalSteps', 'totalDistance', 'durationValue', 'durationUnit', 'averageSleepTime', 'filteredHealthData', 'activities', 'predictedCalories'
+        ));
     }
     
 

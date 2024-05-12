@@ -53,7 +53,7 @@
                              
                              <div class="obesity-status">
                                <span class="obesity-label">Obesity Status</span>
-                               <span class="obesity-value">{{ $obesityPrediction ?? 'N/A'}}</span>
+                               <span class="obesity-value">{{ $healthData->obesity_status ?? "N/A"}}</span>
                              </div>
                            </div>
                          </section>
@@ -69,7 +69,7 @@
                            </div>
                            <div class="calories-info">
                              <p class="calories-label pt-2">Calories</p>
-                             <p class="calories-value">2100 cal</p>
+                             <p class="calories-value">{{ $healthData->calorie_recommendation ?? 'N/A' }} cal</p>
                            </div>
                          </section>
 
