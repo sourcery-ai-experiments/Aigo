@@ -1,13 +1,19 @@
 <?php
 
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Consultation;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\StravaController;
+use App\Http\Controllers\Api\HealthDataAPIController;
+use App\Http\Controllers\Api\UserAPIController;
 use App\Http\Middleware\RedirectBasedOnRole;
 
 
@@ -28,19 +34,7 @@ Route::get('/contact', function () {
 Route::post('/strava/authorize', [StravaController::class, 'authorize'])->name('strava.authorize');
 Route::get('/strava/callback', [StravaController::class, 'handleCallback'])->name('strava.callback');
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/dashboardAdmin', function () {
-        return view('dashboardAdmin');
-    })->name('admin.dashboardAdmin');
 
-    Route::get('/patientList', function () {
-        return view('patient-list');
-    })->name('admin.patientList');
-
-    Route::get('/doctorList', function () {
-        return view('doctor-list');
-    })->name('admin.doctorList');
-});
 
 // 1. CLIENT PAGES
 Route::group(['prefix' => 'client', 'middleware' => ['auth', 'verified']], function () {
@@ -69,13 +63,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 // 3. DOCTOR PAGES
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboardDoctor');
-    })->name('doctor.dashboard');
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard')->middleware('role');
 
-    Route::get('/patient-acceptance', function () {
-        return view('acceptance-patients');
-    })->name('doctor.patient-acceptance');
+    Route::get('/patient-acceptance', [DoctorController::class, 'patientAcceptance'])->name('doctor.patient-acceptance');
 
     Route::get('/schedule', function () {
         return view('doctor-schedule');
@@ -88,5 +78,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth')->get('/api/current-user-id', function () {
+    return response()->json(['user_id' => Auth::id()]);
+});
+
+Route::get('/user/{id}', [UserAPIController::class, 'getUser']);
+Route::get('/health-data/{userId}', [HealthDataAPIController::class, 'getHealthData']);
 
 require __DIR__.'/auth.php';
