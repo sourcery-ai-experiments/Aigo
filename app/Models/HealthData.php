@@ -19,6 +19,7 @@ class HealthData extends Model
         'disease',
         'food',
         'obesity_status',
+        'calorie_recommendation',
     ];
 
     public function user()
