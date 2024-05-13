@@ -55,7 +55,7 @@ class ConsultationController extends Controller
             'location' => $request->input('location'),
             'consultation_status' => 'pending',
         ]);
-        return view("jadwal-konsultasi");
+        return redirect()->route('dashboard');
         //return redirect()->route('consultation.success');
     }
     

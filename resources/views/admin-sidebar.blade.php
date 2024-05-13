@@ -26,7 +26,7 @@
       </div>
 
       <div class="dashboard">
-        <a href="{{ route('admin.dashboardAdmin') }}">
+        <a href="{{ route('admin.dashboard') }}">
           <button type="button" class="btn-dashboard">Dashboard</button>
         </a>
         
@@ -42,7 +42,7 @@
         {{-- SUB-MENU 1: Activity Report --}}
         <div class="btn-group submenu ms-4 ps-2 mb-3">
           <span class="material-symbols-outlined"> monitoring </span>
-          <a href="{{ route('admin.patientList') }}" 
+          <a href="{{ route('showPatient') }}" 
             onmouseover="this.style.color='#6FFFE9'" 
             onmouseout="this.style.color='#8296C5'">Patient List
           </a>
@@ -51,7 +51,7 @@
         {{-- SUB-MENU 2: Request Consultation --}}
         <div class="btn-group submenu ms-4 ps-2  mb-3">
           <span class="material-symbols-outlined"> diversity_1 </span>
-          <a href="{{ route('admin.doctorList') }}"
+          <a href="{{ route('showDoctor') }}"
             onmouseover="this.style.color='#6FFFE9'" 
             onmouseout="this.style.color='#8296C5'">Doctor List
           </a>
